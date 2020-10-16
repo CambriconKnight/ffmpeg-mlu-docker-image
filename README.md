@@ -173,7 +173,7 @@ root@cam-3630:~/ffmpeg-mlu#
 ## Update ##
 Execute the following command when logging in to the container for the first time.
 ```bash
-#1、更新软件列表&&更新软件
+#1、更新软件列表、更新软件
 apt-get update && apt-get upgrade
 #2、安装cmake
 apt-get install cmake
@@ -188,7 +188,13 @@ cd build
 cmake ../ && make -j
 #5、安装mlu_op
 #make install
+ls -la ../lib/libeasyOP.so
 cp ../lib/libeasyOP.so /usr/local/neuware/lib64/
+ls -la /usr/local/neuware/lib64/libeasyOP.so
+#6、设置环境变量
+echo $LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/neuware/lib64
+echo $LD_LIBRARY_PATH
 ```
 
 ## Test ##
@@ -230,7 +236,9 @@ mkdir /root/ffmpeg-mlu/ffmpeg-mlu_apps/ffmpeg-mlu_vid2vid_transcoder/3rdparty/ff
 cp -r /root/ffmpeg-mlu/ffmpeg/install/* /root/ffmpeg-mlu/ffmpeg-mlu_apps/ffmpeg-mlu_vid2vid_transcoder/3rdparty/ffmpeg/
 ls -la /root/ffmpeg-mlu/ffmpeg-mlu_apps/ffmpeg-mlu_vid2vid_transcoder/3rdparty/ffmpeg/
 #2.4、增加ffmpeg/lib到环境变量
+echo $LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/ffmpeg-mlu/ffmpeg-mlu_apps/ffmpeg-mlu_vid2vid_transcoder/3rdparty/ffmpeg/lib
+echo $LD_LIBRARY_PATH
 #2.5、编译ffmpeg-mlu_vid2vid_transcoder
 cd ~/ffmpeg-mlu/ffmpeg-mlu_apps/ffmpeg-mlu_vid2vid_transcoder/
 mkdir build
