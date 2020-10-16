@@ -209,8 +209,10 @@ ls -lh /home/cam/output_cif.h264
 
 ### API ###
 ```bash
-#API接口调用DEMO
-#参考代码（FTP单独提供）：ffmpeg-mlu_vid2vid_transcoder
+#转码验证
+#基于FFMPEG转码有两种方式
+#2、API接口调用方式
+#参考DEMO（FTP单独提供）：ffmpeg-mlu_vid2vid_transcoder
 #2.1、拷贝代码到~/ffmpeg-mlu/
 cd ~/ffmpeg-mlu
 cp /home/cam/ffmpeg-mlu_apps_vid2vid.tar.gz ./
