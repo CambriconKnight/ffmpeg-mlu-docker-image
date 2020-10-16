@@ -174,9 +174,9 @@ root@cam-3630:~/ffmpeg-mlu#
 Execute the following command when logging in to the container for the first time.
 ```bash
 #1、更新软件列表、更新软件
-apt-get update && apt-get upgrade
+apt-get update && apt-get upgrade -y
 #2、安装cmake
-apt-get install cmake
+apt-get install cmake -y
 #3、安装cnml 和 cnplugin
 cd /var/neuware-mlu270-1.5.0
 dpkg -i cnml_7.7.0-1.ubuntu16.04_amd64.deb cnplugin_1.8.0-1.ubuntu16.04_amd64.deb
