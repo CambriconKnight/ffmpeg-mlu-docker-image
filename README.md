@@ -12,6 +12,24 @@ Build docker images for [ffmpeg-mlu](https://github.com/Cambricon/ffmpeg-mlu).
 └── run-container-ffmpeg.sh
 ```
 
+## Clone ##
+```bash
+git clone https://github.com/CambriconKnight/ffmpeg-mlu-docker-image.git
+```
+```bash
+cam@cam-3630:/data/docker$ git clone https://github.com/CambriconKnight/ffmpeg-mlu-docker-image.git
+Cloning into 'ffmpeg-mlu-docker-image'...
+remote: Enumerating objects: 24, done.
+remote: Counting objects: 100% (24/24), done.
+remote: Compressing objects: 100% (18/18), done.
+remote: Total 24 (delta 10), reused 16 (delta 5), pack-reused 0
+Unpacking objects: 100% (24/24), done.
+Checking connectivity... done.
+cam@cam-3630:/data/docker$ ls
+build-image-ffmpeg-mlu.sh  load-image-ffmpeg.sh  README.md  run-container-ffmpeg.sh
+cam@cam-3630:/data/docker$
+```
+
 ## Build ##
 ```bash
 ./build-image-ffmpeg-mlu.sh
