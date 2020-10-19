@@ -22,7 +22,8 @@ yellow="\033[1;33m"
 ##0.git clone
 if [ ! -d "${PATH_FFMPEG_MLU}" ];then
     #git clone git@github.com:Cambricon/ffmpeg-mlu.git
-    git clone git@github.com:CambriconKnight/ffmpeg-mlu.git
+    #git clone git@github.com:CambriconKnight/ffmpeg-mlu.git
+    git clone https://git@github.com/CambriconKnight/ffmpeg-mlu.git
     #cd ffmpeg-mlu
     #git clone https://gitee.com/mirrors/ffmpeg.git -b release/4.2 --depth=1
     #cd ../
