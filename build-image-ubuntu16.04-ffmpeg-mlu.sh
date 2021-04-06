@@ -42,7 +42,7 @@ else
 fi
 cd "${PATH_WORK}"
 # del .git
-find . -name ".git" | xargs rm -Rf
+#find . -name ".git" | xargs rm -Rf
 
 ## copy the dependent packages into the directory of $PATH_WORK
 if [ -f "${neuware_package_name}" ];then
