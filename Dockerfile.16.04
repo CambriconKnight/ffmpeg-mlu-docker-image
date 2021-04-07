@@ -37,23 +37,27 @@ ARG mlu_platform=MLU270
 
 RUN echo -e 'nameserver 114.114.114.114' > /etc/resolv.conf
 
-RUN echo deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted  > /etc/apt/sources.list && \
-    echo deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted multiverse universe >> /etc/apt/sources.list && \
-    echo deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted >> /etc/apt/sources.list && \
-    echo deb http://mirrors.aliyun.com/ubuntu/ xenial universe >> /etc/apt/sources.list && \
-    echo deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe >> /etc/apt/sources.list && \
-    echo deb http://mirrors.aliyun.com/ubuntu/ xenial multiverse >> /etc/apt/sources.list && \
-    echo deb http://mirrors.aliyun.com/ubuntu/ xenial-updates multiverse >> /etc/apt/sources.list && \
-    echo deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse >> /etc/apt/sources.list && \
-    echo deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted >> /etc/apt/sources.list && \
-    echo deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe  >> /etc/apt/sources.list && \
-    echo deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse >> /etc/apt/sources.list && \
-    apt-get update --fix-missing && apt-get upgrade -y && apt-get install -y --no-install-recommends \
+RUN echo deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted > /etc/apt/sources.list && \
+    echo deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted >> /etc/apt/sources.list && \
+    echo deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial universe >> /etc/apt/sources.list && \
+    echo deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates universe >> /etc/apt/sources.list && \
+    echo deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial multiverse >> /etc/apt/sources.list && \
+    echo deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates multiverse >> /etc/apt/sources.list && \
+    echo deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse >> /etc/apt/sources.list && \
+    echo deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted >> /etc/apt/sources.list && \
+    echo deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security universe >> /etc/apt/sources.list && \
+    echo deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security multiverse >> /etc/apt/sources.list && \
+    apt-get install --assume-yes && apt-get update --fix-missing && \
+    rm -rf /var/lib/apt/lists/* && mkdir /var/lib/apt/lists/partial && \
+    apt-get clean && apt-get update --fix-missing && \
+    apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
             curl git wget vim build-essential cmake make ca-certificates nasm yasm && \
+            libopencv-dev \
+            libgoogle-glog-dev \
             openssh-server libc6-dev-i386 \
+            libsdl2-dev  \
+            lcov  \
             net-tools && \
-    apt-get update --fix-missing && \
-    apt-get install -y --no-install-recommends libopencv-dev \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
