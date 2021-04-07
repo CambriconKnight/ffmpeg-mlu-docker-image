@@ -48,13 +48,12 @@ RUN echo deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted  > /etc/ap
     echo deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted >> /etc/apt/sources.list && \
     echo deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe  >> /etc/apt/sources.list && \
     echo deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse >> /etc/apt/sources.list && \
-    apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
+    apt-get update --fix-missing && apt-get upgrade -y && apt-get install -y --no-install-recommends \
             curl git wget vim build-essential make ca-certificates nasm yasm \
             cmake libopencv-dev \
             openssh-server libc6-dev-i386 \
             net-tools && \
     apt-get clean && \
-    apt-get update --fix-missing && \
     rm -rf /var/lib/apt/lists/*
 
 COPY . /root/ffmpeg-mlu/
