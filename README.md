@@ -62,13 +62,19 @@ Neuware SDK: https://cair.cambricon.com/#/home/catalog?type=SDK%20Release
 │   ├── Dockerfile.16.04                #用于编译Docker 镜像的Dockerfile 文件
 │   ├── pip.conf                        #切换python的pip源
 │   ├── pre_packages.sh                 #安装基于操作系统所需依赖包, 也可用于裸机下环境搭建
-│   ├── sources_16.04.list              #Ubuntu16.04 sources文件
-│   └── test-ffmpeg-mlu.sh              #此脚本用于测试验证FFmpeg-MLU各模块: 测试Resize/CVTColor算子、H264/HEVC编码器和解码器、DNN模块
+│   └── sources_16.04.list              #Ubuntu16.04 sources文件
 ├── env.sh                              #用于设置全局环境变量
 ├── load-image-ffmpeg-mlu.sh            #加载Docker 镜像
 ├── README.md                           #README
 ├── run-container-ffmpeg-mlu.sh         #启动Docker 容器
-└── save-image-ffmpeg-mlu.sh            #导出镜像文件，实现镜像内容持久化
+├── save-image-ffmpeg-mlu.sh            #导出镜像文件，实现镜像内容持久化
+├── sync.sh                             #同步[dependent_files] 到临时目录[ffmpeg-mlu]
+├── test                                #测试FFmpeg-MLU 相关功能目录
+│   ├── api                             #API方式测试
+│   ├── cmd                             #命令方式测试
+│   ├── data                            #测试数据
+│   └── README.md
+└── tools                               #常用工具存放目录
 ```
 
 *如需在裸机HOST上进行环境搭建, 也可以利用[docker](./docker)目录以下脚本实现快速搭建。*
@@ -78,8 +84,7 @@ Neuware SDK: https://cair.cambricon.com/#/home/catalog?type=SDK%20Release
 ├── docker
 │   ├── build-ffmpeg-mlu.sh             #此脚本用于编译FFmpeg-MLU 及相关依赖项, 也可用于裸机下环境搭建
 │   ├── pre_packages.sh                 #安装基于操作系统所需依赖包, 也可用于裸机下环境搭建
-│   ├── sources_16.04.list              #Ubuntu16.04 sources文件
-│   └── test-ffmpeg-mlu.sh              #此脚本用于测试验证FFmpeg-MLU各模块: 测试Resize/CVTColor算子、H264/HEVC编码器和解码器、DNN模块
+│   └── sources_16.04.list              #Ubuntu16.04 sources文件
 ```
 
 # 3. Clone
