@@ -1,130 +1,119 @@
-# ffmpeg-mlu Docker Images #
+<p align="center">
+    <a href="https://gitee.com/cambriconknight/ffmpeg-mlu-docker-image">
+        <h1 align="center">FFMpeg-MLU环境搭建与验证</h1>
+    </a>
+</p>
 
-Build docker images for [ffmpeg-mlu](https://github.com/Cambricon/ffmpeg-mlu).
+# 1. 概述
 
-## Directory tree ##
+本工具集主要基于Docker容器进行[FFMpeg-MLU](https://github.com/Cambricon/ffmpeg-mlu)环境搭建与验证。力求压缩寒武纪FFMpeg-MLU环境搭建与功能验证的时间成本, 以便快速上手寒武纪FFMpeg-MLU。
+
+*本工具集仅用于个人学习，打通流程； 不对效果负责，不承诺商用。*
+
+**说明:**
+
+基于寒武纪® MLU硬件平台，寒武纪 FFmpeg-MLU使用纯C接口实现硬件加速的视频编解码。
+
+## 1.1. 硬件环境准备
+
+| 名称            | 数量       | 备注                |
+| :-------------- | :--------- | :------------------ |
+| 开发主机/服务器 | 一台       |主流配置即可；电源功率大于500W；PCIe Gen.3 x16 |
+| MLU270-F4/S4    | 一套       |使用板卡自带的8pin连接器连接主机电源|
+
+## 1.2. 软件环境准备
+
+| 名称                   | 版本/文件                                    | 备注            |
+| :-------------------- | :-------------------------------             | :--------------- |
+| Linux OS              | Ubuntu16.04/Ubuntu18.04/CentOS7   | 宿主机操作系统   |
+| Driver_MLU270         | neuware-mlu270-driver-dkms_4.9.8_all.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/Driver/neuware-mlu270-driver-dkms_4.9.8_all.deb)   |
+| CNToolkit_MLU270      | cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb   | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNToolkit/cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb)   |
+| CNCV_MLU270           | cncv_0.4.602-1.ubuntu16.04_amd64.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNCV/cncv_0.4.602-1.ubuntu16.04_amd64.deb)   |
+| FFmpeg-MLU            | FFmpeg-MLU   | 自动[下载](https://github.com/Cambricon/ffmpeg-mlu)    |
+| FFmpeg                | FFmpeg   | 自动[下载](https://gitee.com/mirrors/ffmpeg.git)    |
+
+*以上软件包涉及FTP手动下载的,可下载到本地[dependent_files](./dependent_files)目录下,方便对应以下步骤中的提示操作。*
+
+## 1.3. 资料下载
+
+Ubuntu16.04: http://mirrors.aliyun.com/ubuntu-releases/16.04
+
+Ubuntu18.04: http://mirrors.aliyun.com/ubuntu-releases/18.04
+
+MLU开发文档: https://developer.cambricon.com/index/document/index/classid/3.html
+
+Neuware SDK: https://cair.cambricon.com/#/home/catalog?type=SDK%20Release
+
+其他开发资料, 可前往[寒武纪开发者社区](https://developer.cambricon.com)注册账号按需下载。也可在官方提供的专属FTP账户指定路径下载。
+
+# 2. Structure
+
+*当前仓库默认基于Docker 进行FFMpeg-MLU 环境搭建与验证。按照以下章节步骤即可快速实现FFMpeg-MLU环境搭建与验证*
 
 ```bash
 .
-├── build-image-ubuntu16.04-ffmpeg-mlu.sh
-├── README.md
-├── load-image-ubuntu16.04-ffmpeg-mlu.sh
-└── run-container-ubuntu16.04-ffmpeg-mlu.sh
+├── build-image-ffmpeg-mlu.sh           #此脚本用于编译Docker 镜像用于搭建FFMpeg-MLU 环境
+├── clean.sh                            #清理Build出来的临时目录或文件,包括镜像文件,已加载的镜像,已加载的容器等
+├── dependent_files                     #此目录用于存储FFMpeg-MLU 环境搭建与验证所依赖的文件
+│   └── README.md
+├── docker                              #此目录主要用于存储编译Docker 镜像及验证FFMpeg-MLU 所需依赖文件
+│   ├── build-ffmpeg-mlu.sh             #此脚本用于编译FFMpeg-MLU 及相关依赖项, 也可用于裸机下环境搭建
+│   ├── clean.sh                        #清理当前目录下新编译生存的Docker 镜像文件
+│   ├── Dockerfile.16.04                #用于编译Docker 镜像的Dockerfile 文件
+│   ├── pip.conf                        #切换python的pip源
+│   ├── pre_packages.sh                 #安装基于操作系统所需依赖包, 也可用于裸机下环境搭建
+│   ├── sources_16.04.list              #Ubuntu16.04 sources文件
+│   └── test-ffmpeg-mlu.sh              #此脚本用于测试验证FFMpeg-MLU各模块: 测试Resize/CVTColor算子、H264/HEVC编码器和解码器、DNN模块
+├── env.sh                              #用于设置全局环境变量
+├── load-image-ffmpeg-mlu.sh            #加载Docker 镜像
+├── README.md                           #README
+├── run-container-ffmpeg-mlu.sh         #启动Docker 容器
+└── save-image-ffmpeg-mlu.sh            #导出镜像文件，实现镜像内容持久化
 ```
 
-## Clone ##
+*如需在裸机HOST上进行环境搭建, 也可以利用[docker](./docker)目录以下脚本实现快速搭建。*
+
+```bash
+.
+├── docker
+│   ├── build-ffmpeg-mlu.sh             #此脚本用于编译FFMpeg-MLU 及相关依赖项, 也可用于裸机下环境搭建
+│   ├── pre_packages.sh                 #安装基于操作系统所需依赖包, 也可用于裸机下环境搭建
+│   ├── sources_16.04.list              #Ubuntu16.04 sources文件
+│   └── test-ffmpeg-mlu.sh              #此脚本用于测试验证FFMpeg-MLU各模块: 测试Resize/CVTColor算子、H264/HEVC编码器和解码器、DNN模块
+```
+
+# 3. Clone
 ```bash
 git clone https://github.com/CambriconKnight/ffmpeg-mlu-docker-image.git
 ```
+
+# 4. Build
 ```bash
-cam@cam-3630:/data/docker$ git clone https://github.com/CambriconKnight/ffmpeg-mlu-docker-image.git
-Cloning into 'ffmpeg-mlu-docker-image'...
-remote: Enumerating objects: 24, done.
-remote: Counting objects: 100% (24/24), done.
-remote: Compressing objects: 100% (18/18), done.
-remote: Total 24 (delta 10), reused 16 (delta 5), pack-reused 0
-Unpacking objects: 100% (24/24), done.
-Checking connectivity... done.
-cam@cam-3630:/data/docker$ ls
-build-image-ubuntu16.04-ffmpeg-mlu.sh  load-image-ubuntu16.04-ffmpeg-mlu.sh  README.md  run-container-ubuntu16.04-ffmpeg-mlu.sh
-cam@cam-3630:/data/docker$
+#编译 ffmpeg-mlu 镜像
+./build-image-ffmpeg-mlu.sh
 ```
 
-## Build ##
+# 5. Load
 ```bash
-./build-image-ubuntu16.04-ffmpeg-mlu.sh
+#加载Docker镜像
+./load-image-ffmpeg-mlu.sh
 ```
 
-## Load ##
+# 6. Run
 ```bash
-./load-image-ubuntu16.04-ffmpeg-mlu.sh
+#启动Docker容器
+./run-container-ffmpeg-mlu.sh
 ```
 
-## Run ##
+# 7.Test
 ```bash
-./run-container-ubuntu16.04-ffmpeg-mlu.sh
-```
-
-## Update ##
-Execute the following command when logging in to the container for the first time.
-```bash
-#1、更新软件列表、更新软件
-apt-get update && apt-get upgrade -y
-#2、安装cmake
-apt-get install cmake -y
-#3、安装cnml 和 cnplugin
-cd /var/neuware-mlu270-1.5.0
-dpkg -i cnml_7.7.0-1.ubuntu16.04_amd64.deb cnplugin_1.8.0-1.ubuntu16.04_amd64.deb
-cd -
-#4、编译mlu_op
-cd ~/ffmpeg-mlu/mlu_op
-mkdir build
-cd build
-cmake ../ && make -j
-#5、安装mlu_op
-#make install
-ls -la ../lib/libeasyOP.so
-cp ../lib/libeasyOP.so /usr/local/neuware/lib64/
-ls -la /usr/local/neuware/lib64/libeasyOP.so
-#6、设置环境变量
-echo $LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/neuware/lib64
-echo $LD_LIBRARY_PATH
-```
-
-## Test ##
-### Command ###
-```bash
+#执行测试脚本
 #转码验证
 #基于FFMPEG转码有两种方式
 #1、命令行方式
-#1.1、执行ffmpeg
-cd ~/ffmpeg-mlu/ffmpeg/build/
-./ffmpeg -y -c:v h264_mludec -resize 352x288 -i /home/cam/data/jellyfish-3-mbps-hd-h264_1800.mkv -c:v h264_mluenc output_cif.h264
-#1.2、查看转码后的视频文件
-cd ~/ffmpeg-mlu/ffmpeg/build/
-ls -lh ./output_cif.h264
-cp output_cif.h264 /home/cam/
-ls -lh /home/cam/output_cif.h264
-```
-
-### API ###
-```bash
-#转码验证
-#基于FFMPEG转码有两种方式
+cd /home/share/test/cmd
+./test-ffmpeg-mlu-cmd.sh
 #2、API接口调用方式
-#参考DEMO（FTP单独提供）：ffmpeg-mlu_vid2vid_transcoder
-#2.1、拷贝代码到~/ffmpeg-mlu/
-cd ~/ffmpeg-mlu
-cp /home/cam/ffmpeg-mlu_apps_vid2vid.tar.gz ./
-tar zxvf ffmpeg-mlu_apps_vid2vid.tar.gz
-ls -la ~/ffmpeg-mlu/ffmpeg-mlu_apps/
-#2.2、编译ffmpeg动态库
-cd ~/ffmpeg-mlu/ffmpeg
-mkdir install
-./configure --prefix="./install/" --enable-shared --enable-gpl --enable-version3 --enable-mlumpp --extra-cflags="-I/usr/local/neuware/include" --extra-ldflags="-L/usr/local/neuware/lib64" --extra-libs="-lcncodec -lcnrt -ldl -lcndrv"  --enable-debug --disable-asm --disable-stripping --disable-optimizations
-make -j && make install
-ls -la /root/ffmpeg-mlu/ffmpeg/install
-#2.3、部署ffmpeg动态库到apps第三方依赖目录
-cd /root/ffmpeg-mlu/ffmpeg/install
-mkdir /root/ffmpeg-mlu/ffmpeg-mlu_apps/ffmpeg-mlu_vid2vid_transcoder/3rdparty/ffmpeg/
-cp -r /root/ffmpeg-mlu/ffmpeg/install/* /root/ffmpeg-mlu/ffmpeg-mlu_apps/ffmpeg-mlu_vid2vid_transcoder/3rdparty/ffmpeg/
-ls -la /root/ffmpeg-mlu/ffmpeg-mlu_apps/ffmpeg-mlu_vid2vid_transcoder/3rdparty/ffmpeg/
-#2.4、增加ffmpeg/lib到环境变量
-echo $LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/ffmpeg-mlu/ffmpeg-mlu_apps/ffmpeg-mlu_vid2vid_transcoder/3rdparty/ffmpeg/lib
-echo $LD_LIBRARY_PATH
-#2.5、编译ffmpeg-mlu_vid2vid_transcoder
-cd ~/ffmpeg-mlu/ffmpeg-mlu_apps/ffmpeg-mlu_vid2vid_transcoder/
-mkdir build
-cd build
-cmake .. && make -j
-ls -la
-#2.6、运行app，验证功能
-#Usage: ./vid2vid_trans <file_path> <dst_w> <dst_h> <device_id> <thread_num> <save_flag>
-./vid2vid_trans /home/cam/data/jellyfish-3-mbps-hd-h264_1800.mkv 352 288 0 10 1
-#2.7、查看转码后的视频文件
-ls -la _thread_*
-cp _thread_* /home/cam/data
-ls -lh /home/cam/data/_thread_*
+cd /home/share/test/api
+./test-ffmpeg-mlu-api.sh
 ```

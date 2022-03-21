@@ -1,15 +1,21 @@
 #!/bin/bash
 set -e
 # -------------------------------------------------------------------------------
-# Filename:     run-container-ubuntu16.04-ffmpeg-mlu.sh
-# UpdateDate:   2021/02/23
-# Description:  Run docker image for ffmpeg-mlu.
-# Example:      ./run-container-ubuntu16.04-ffmpeg-mlu.sh
+# Filename:     run-container-ffmpeg-mlu.sh
+# UpdateDate:   2022/02/08
+# Description:  Run docker image for IDE.
+# Example:
+#               ./run-container-ffmpeg-mlu.sh
+#               ./run-container-ffmpeg-mlu.sh 16.04
+#               ./run-container-ffmpeg-mlu.sh 18.04
 # Depends:      container-$OS-$PATH_WORK-$VERSION
 # Notes:
 # -------------------------------------------------------------------------------
+#Dockerfile(16.04/18.04/CentOS)
+OSVer="16.04"
+if [[ $# -ne 0 ]];then OSVer="${1}";fi
 # Source env
-source "./env.sh"
+source ./env.sh $OSVer
 ######Modify according to your development environment#####
 #Share path on the host
 PATH_SHARE_HOST="$PWD"
@@ -42,7 +48,7 @@ if [ 0 -eq $num ];then
     #sudo xhost +
     sudo docker run -e DISPLAY=unix$DISPLAY --privileged=true \
         --device /dev/cambricon_dev0 \
-        --net=host --pid=host \
+        --net=host --ipc=host --pid=host \
         -v /sys/kernel/debug:/sys/kernel/debug \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         -it -v $PATH_SHARE_HOST:$PATH_SHARE_DOCKER \

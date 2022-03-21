@@ -1,23 +1,28 @@
 #!/bin/bash
 set -e
 # -------------------------------------------------------------------------------
-# Filename:     load-image-ubuntu16.04-ffmpeg-mlu.sh
-# UpdateDate:   2021/02/23
-# Description:  Loading docker image for ffmpeg-mlu.
-# Example:      ./load-image-ubuntu16.04-ffmpeg-mlu.sh
+# Filename:     load-image-ffmpeg-mlu.sh
+# UpdateDate:   2022/02/08
+# Description:  Loading docker image for IDE.
+# Example:
+#               ./load-image-ffmpeg-mlu.sh
+#               ./load-image-ffmpeg-mlu.sh 16.04
+#               ./load-image-ffmpeg-mlu.sh 18.04
 # Depends:      image-$OS-$PATH_WORK-$VERSION.tar.gz
 # Notes:
 # -------------------------------------------------------------------------------
+#Dockerfile(16.04/18.04/CentOS)
+OSVer="16.04"
+if [[ $# -ne 0 ]];then OSVer="${1}";fi
 # Source env
-source "./env.sh"
-
+source ./env.sh $OSVer
 #################### main ####################
 # 0.Check param
-if [[ $# -eq 0 ]];then
-    echo -e "${yellow}WARNING: Load images(${FULLNAME_IMAGE}) by default. ${none}"
-else
-    FULLNAME_IMAGE="${1}"
-fi
+#if [[ $# -eq 0 ]];then
+#    echo -e "${yellow}WARNING: Load images(${FULLNAME_IMAGE}) by default. ${none}"
+#else
+#    FULLNAME_IMAGE="${1}"
+#fi
 # 0.Check File Images
 if [[ ! -f ${FULLNAME_IMAGE} ]]; then
     echo -e "${red}ERROR: Images(${FULLNAME_IMAGE}) does not exist! ${none}" &&  exit -1

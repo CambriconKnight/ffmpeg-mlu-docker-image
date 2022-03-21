@@ -1,36 +1,42 @@
 # -------------------------------------------------------------------------------
 # Filename:    env.sh
 # Revision:    1.0.0
-# Date:        2021/02/23
+# Date:        2022/03/18
 # Description: Common Environment variable
 # Example:
 # Depends:
 # Notes:
 # -------------------------------------------------------------------------------
+#################### version ####################
+## 以下信息,根据各个版本中文件实际名词填写.
+#Version
+VER="1.7.604"
+#Neuware SDK For MLU270(依操作系统选择)
+FILENAME_MLU270_CNToolkit="cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb"
+FILENAME_MLU270_CNCV="cncv_0.4.602-1.ubuntu16.04_amd64.deb"
+#################### docker ####################
 #Work
 PATH_WORK="ffmpeg-mlu"
 #Dockerfile(16.04/18.04/CentOS)
-TYPE_DOCKERFILE="16.04"
+OSVer="16.04"
+if [[ $# -ne 0 ]];then OSVer="${1}";fi
 #(Dockerfile.16.04/Dockerfile.18.04/Dockerfile.CentOS)
-FILENAME_DOCKERFILE="Dockerfile.$TYPE_DOCKERFILE"
+FILENAME_DOCKERFILE="Dockerfile.$OSVer"
 DIR_DOCKER="docker"
 #Version
-VER="1.6.602"
-VERSION="v1.6.602"
-#VERSION="v${VER}"
-#VERSION="iva-1.6.106"
+VERSION="v${VER}"
 #Organization
-ORG="cam"
+ORG="kang"
 #Operating system
-OS="ubuntu16.04"
-#Docker image(cam/ubuntu16.04-ffmpeg-mlu)
+OS="ubuntu$OSVer"
+#Docker image
 MY_IMAGE="$ORG/$OS-$PATH_WORK"
 #Docker image name(cam/ubuntu16.04-ffmpeg-mlu:v1.6.0)
 NAME_IMAGE="$MY_IMAGE:$VERSION"
 #FileName DockerImage(image-ubuntu16.04-ffmpeg-mlu-v1.6.0.tar.gz)
 FILENAME_IMAGE="image-$OS-$PATH_WORK-$VERSION.tar.gz"
-FULLNAME_IMAGE="./${FILENAME_IMAGE}"
-#Docker container name(container-ubuntu16.04-caffe-v1.6.0)
+FULLNAME_IMAGE="./docker/${FILENAME_IMAGE}"
+#Docker container name
 MY_CONTAINER="container-$OS-$PATH_WORK-$VERSION"
 
 #Font color
