@@ -1,0 +1,7 @@
+# your args (thread_id    inputfile_path     dst_w     dst_h    dev_id    save_flag  scale_type)
+#thread0 rtsp://username1:password1@10.100.9.70:8554/cars-2.mkv 352 288 1 0 mlu
+#thread0 ../../data/test.mp4 352 288 0 1 cpu
+thread0 ../../data/test.mp4 352 288 0 1 mlu
+thread0 ../../data/test.mp4 352 288 0 1 mlu
+thread0 ../../data/test.mp4 352 288 0 1 mlu
+thread0 ../../data/test.mp4 352 288 0 1 mlu

@@ -2,5 +2,7 @@
 set -e
 
 # 1.rm
-rm -vf ./output_cif.h264
+cd /home/share/test/api/transcode
+make clean
+rm -vf ./transcode_*.mp4
 ls -la

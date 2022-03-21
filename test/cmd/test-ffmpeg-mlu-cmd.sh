@@ -27,15 +27,15 @@ export LD_LIBRARY_PATH=/usr/local/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${NEUWARE_HOME}/lib64
 
 # 2. 基于FFMPEG命令行方式验证MLU转码功能
-# 2.1、执行ffmpeg
+# 2.1. 执行ffmpeg
 cd /home/share/test/cmd
 # CPU CMD
 #ffmpeg -y -re -threads 1 -i ../data/test.mp4 -s 352x288 -an output_cif-1-cpu-cpu-cpu.h264
 #ffmpeg -y -re -threads 1 -i ../data/test.mp4 -s 352x288 -an -c:v libx264 output_cif-1-cpu-cpu-cpu.h264
 # MLU CMD
 ffmpeg -y -c:v h264_mludec -resize 352x288 -i ../data/test.mp4 -c:v h264_mluenc output_cif.h264
-echo -e "${green}[Test ffmpeg-mlu ... Done] "
+echo -e "${green}"
 # 2.2、查看转码后的视频文件
 ls -lh ./output_cif.h264
-echo -e "${none}"
+echo -e "[Test ffmpeg-mlu ... Done] ${none}"
 

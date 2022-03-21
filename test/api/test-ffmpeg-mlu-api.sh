@@ -27,4 +27,12 @@ export LD_LIBRARY_PATH=/usr/local/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${NEUWARE_HOME}/lib64
 
 # 2. 基于FFMPEG API方式验证MLU转码功能
-
+# 2.1. 执行ffmpeg
+cd /home/share/test/api/transcode
+make clean
+make -j4
+./transcode ./input.txt
+echo -e "${green}"
+# 2.2. 查看转码后的视频文件
+ls -lh ./transcode_*.mp4
+echo -e "[Test ffmpeg-mlu ... Done] ${none}"
