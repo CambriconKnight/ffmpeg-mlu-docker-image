@@ -1,12 +1,12 @@
 <p align="center">
     <a href="https://gitee.com/cambriconknight/ffmpeg-mlu-docker-image">
-        <h1 align="center">FFMpeg-MLU环境搭建与验证</h1>
+        <h1 align="center">FFmpeg-MLU环境搭建与验证</h1>
     </a>
 </p>
 
 # 1. 概述
 
-本工具集主要基于Docker容器进行[FFMpeg-MLU](https://github.com/Cambricon/ffmpeg-mlu)环境搭建与验证。力求压缩寒武纪FFMpeg-MLU环境搭建与功能验证的时间成本, 以便快速上手寒武纪FFMpeg-MLU。
+本工具集主要基于Docker容器进行[FFmpeg-MLU](https://github.com/Cambricon/ffmpeg-mlu)环境搭建与验证。力求压缩寒武纪FFmpeg-MLU环境搭建与功能验证的时间成本, 以便快速上手寒武纪FFmpeg-MLU。
 
 *本工具集仅用于个人学习，打通流程； 不对效果负责，不承诺商用。*
 
@@ -48,22 +48,22 @@ Neuware SDK: https://cair.cambricon.com/#/home/catalog?type=SDK%20Release
 
 # 2. Structure
 
-*当前仓库默认基于Docker 进行FFMpeg-MLU 环境搭建与验证。按照以下章节步骤即可快速实现FFMpeg-MLU环境搭建与验证*
+*当前仓库默认基于Docker 进行FFmpeg-MLU 环境搭建与验证。按照以下章节步骤即可快速实现FFmpeg-MLU环境搭建与验证*
 
 ```bash
 .
-├── build-image-ffmpeg-mlu.sh           #此脚本用于编译Docker 镜像用于搭建FFMpeg-MLU 环境
+├── build-image-ffmpeg-mlu.sh           #此脚本用于编译Docker 镜像用于搭建FFmpeg-MLU 环境
 ├── clean.sh                            #清理Build出来的临时目录或文件,包括镜像文件,已加载的镜像,已加载的容器等
-├── dependent_files                     #此目录用于存储FFMpeg-MLU 环境搭建与验证所依赖的文件
+├── dependent_files                     #此目录用于存储FFmpeg-MLU 环境搭建与验证所依赖的文件
 │   └── README.md
-├── docker                              #此目录主要用于存储编译Docker 镜像及验证FFMpeg-MLU 所需依赖文件
-│   ├── build-ffmpeg-mlu.sh             #此脚本用于编译FFMpeg-MLU 及相关依赖项, 也可用于裸机下环境搭建
+├── docker                              #此目录主要用于存储编译Docker 镜像及验证FFmpeg-MLU 所需依赖文件
+│   ├── build-ffmpeg-mlu.sh             #此脚本用于编译FFmpeg-MLU 及相关依赖项, 也可用于裸机下环境搭建
 │   ├── clean.sh                        #清理当前目录下新编译生存的Docker 镜像文件
 │   ├── Dockerfile.16.04                #用于编译Docker 镜像的Dockerfile 文件
 │   ├── pip.conf                        #切换python的pip源
 │   ├── pre_packages.sh                 #安装基于操作系统所需依赖包, 也可用于裸机下环境搭建
 │   ├── sources_16.04.list              #Ubuntu16.04 sources文件
-│   └── test-ffmpeg-mlu.sh              #此脚本用于测试验证FFMpeg-MLU各模块: 测试Resize/CVTColor算子、H264/HEVC编码器和解码器、DNN模块
+│   └── test-ffmpeg-mlu.sh              #此脚本用于测试验证FFmpeg-MLU各模块: 测试Resize/CVTColor算子、H264/HEVC编码器和解码器、DNN模块
 ├── env.sh                              #用于设置全局环境变量
 ├── load-image-ffmpeg-mlu.sh            #加载Docker 镜像
 ├── README.md                           #README
@@ -76,10 +76,10 @@ Neuware SDK: https://cair.cambricon.com/#/home/catalog?type=SDK%20Release
 ```bash
 .
 ├── docker
-│   ├── build-ffmpeg-mlu.sh             #此脚本用于编译FFMpeg-MLU 及相关依赖项, 也可用于裸机下环境搭建
+│   ├── build-ffmpeg-mlu.sh             #此脚本用于编译FFmpeg-MLU 及相关依赖项, 也可用于裸机下环境搭建
 │   ├── pre_packages.sh                 #安装基于操作系统所需依赖包, 也可用于裸机下环境搭建
 │   ├── sources_16.04.list              #Ubuntu16.04 sources文件
-│   └── test-ffmpeg-mlu.sh              #此脚本用于测试验证FFMpeg-MLU各模块: 测试Resize/CVTColor算子、H264/HEVC编码器和解码器、DNN模块
+│   └── test-ffmpeg-mlu.sh              #此脚本用于测试验证FFmpeg-MLU各模块: 测试Resize/CVTColor算子、H264/HEVC编码器和解码器、DNN模块
 ```
 
 # 3. Clone

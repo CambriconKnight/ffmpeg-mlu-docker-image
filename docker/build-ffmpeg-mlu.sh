@@ -22,6 +22,7 @@ white="\033[1;37m"
 #ENV
 PATH_WORK="ffmpeg-mlu"
 WORK_DIR="/root/ffmpeg-mlu"
+FILENAME_FFMPEG_MLU="ffmpeg-mlu-master.tar.gz"
 #############################################################
 # 1. Compile and install FFmpeg-MLU
 ## 1.1. Download FFmpeg-MLU
