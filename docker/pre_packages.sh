@@ -11,7 +11,7 @@ rm -rf /var/lib/apt/lists/* \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
         curl git wget vim build-essential cmake make ca-certificates nasm yasm \
-        openssh-server libc6-dev-i386 \
+        openssh-server libc6-dev-i386 unzip \
         net-tools \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \

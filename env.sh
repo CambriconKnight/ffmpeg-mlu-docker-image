@@ -12,8 +12,11 @@
 #Version
 VER="1.7.604"
 #Neuware SDK For MLU270(依操作系统选择)
-FILENAME_MLU270_CNToolkit="cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb"
-FILENAME_MLU270_CNCV="cncv_0.4.602-1.ubuntu16.04_amd64.deb"
+##ubuntu16.04
+#FILENAME_MLU270_CNToolkit="cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb"
+#FILENAME_MLU270_CNCV="cncv_0.4.602-1.ubuntu16.04_amd64.deb"
+FILENAME_MLU270_CNToolkit="cntoolkit_1.7.5-1.ubuntu18.04_amd64.deb"
+FILENAME_MLU270_CNCV="cncv_0.4.602-1.ubuntu18.04_amd64.deb"
 #################### docker ####################
 #Work
 PATH_WORK="ffmpeg-mlu"
