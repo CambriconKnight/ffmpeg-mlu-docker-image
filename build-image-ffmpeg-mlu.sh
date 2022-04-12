@@ -5,6 +5,8 @@ set -e
 # UpdateDate:   2022/02/08
 # Description:  Build docker images for ffmpeg-mlu.
 # Example:      ./build-image-ffmpeg-mlu.sh
+#               ./build-image-ffmpeg-mlu.sh 16.04
+#               ./build-image-ffmpeg-mlu.sh 18.04
 # Depends:
 #               Driver(ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/Driver/neuware-mlu270-driver-dkms_4.9.8_all.deb)
 #               CNToolkit(ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNToolkit/cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb)
@@ -14,7 +16,7 @@ set -e
 # Notes:
 # -------------------------------------------------------------------------------
 #Dockerfile(16.04/18.04/CentOS)
-OSVer="16.04"
+OSVer="18.04"
 if [[ $# -ne 0 ]];then OSVer="${1}";fi
 # 0. Source env
 source ./env.sh $OSVer
