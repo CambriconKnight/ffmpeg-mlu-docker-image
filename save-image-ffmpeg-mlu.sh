@@ -16,7 +16,7 @@ set -e
 CMD_TIME=$(date +%Y%m%d%H%M%S) # eg:20210402230402
 
 #Dockerfile(16.04/18.04/CentOS)
-OSVer="16.04"
+OSVer="18.04"
 if [[ $# -ne 0 ]];then OSVer="${1}";fi
 # Source env
 source ./env.sh $OSVer
