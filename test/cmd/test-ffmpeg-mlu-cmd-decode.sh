@@ -34,6 +34,13 @@ ffmpeg_mlu_cmd_decode() {
     if [ ! -d $LOG_PACH ];then
         mkdir -p $LOG_PACH
     fi
+    if [ ! -f "${VIDEO}" ];then
+        echo -e "${red}File(${VIDEO}): Not exist!${none}"
+        echo -e "${yellow}  Please download ${VIDEO} from baidudisk(cat ../../dependent_files/README.md)!${none}"
+        echo -e "${yellow}  For further information, please contact us.${none}"
+        exit -1
+    fi
+    #TEST
     i=1
     while((i <= $CHANNEL_NUM))
     do
@@ -71,5 +78,6 @@ echo -e "${green}"
 # 2.2、查看转码后的log文件
 #ls -lh *.log
 #tail -n 10 ./log/mludec_Process*.log
-echo -e "[Test ffmpeg-mlu ... Done] ${none}"
+echo -e "[Monitor Video Encoder 10-11 On Host:]"
+echo -e "[cd ./tools && ./test-cnmon.sh 0] ${none}"
 
