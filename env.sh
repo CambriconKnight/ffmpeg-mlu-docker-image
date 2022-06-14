@@ -10,19 +10,24 @@
 #################### version ####################
 ## 以下信息,根据各个版本中文件实际名词填写.
 #Version
-VER="1.7.604"
+VER="1.4.0"
+#MLU_PLATFORM="MLU200"
+MLU_PLATFORM="MLU370"
 #Neuware SDK For MLU270(依操作系统选择)
 ##ubuntu16.04
-#FILENAME_MLU270_CNToolkit="cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb"
-#FILENAME_MLU270_CNCV="cncv_0.4.602-1.ubuntu16.04_amd64.deb"
+#FILENAME_CNToolkit="cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb"
+#FILENAME_CNCV="cncv_0.4.602-1.ubuntu16.04_amd64.deb"
 ##ubuntu18.04
-FILENAME_MLU270_CNToolkit="cntoolkit_1.7.5-1.ubuntu18.04_amd64.deb"
-FILENAME_MLU270_CNCV="cncv_0.4.602-1.ubuntu18.04_amd64.deb"
+#FILENAME_CNToolkit="cntoolkit_1.7.5-1.ubuntu18.04_amd64.deb"
+#FILENAME_CNCV="cncv_0.4.602-1.ubuntu18.04_amd64.deb"
+##ubuntu18.04 for MLU370
+FILENAME_CNToolkit="cntoolkit_2.8.1-1.ubuntu18.04_amd64.deb"
+FILENAME_CNCV="cncv_0.10.0-1.ubuntu18.04_amd64.deb"
 #################### docker ####################
 #Work
 PATH_WORK="ffmpeg-mlu"
 #Dockerfile(16.04/18.04/CentOS)
-OSVer="16.04"
+OSVer="18.04"
 if [[ $# -ne 0 ]];then OSVer="${1}";fi
 #(Dockerfile.16.04/Dockerfile.18.04/Dockerfile.CentOS)
 FILENAME_DOCKERFILE="Dockerfile.$OSVer"
@@ -40,7 +45,7 @@ NAME_IMAGE="$MY_IMAGE:$VERSION"
 #FileName DockerImage(image-ubuntu16.04-ffmpeg-mlu-v1.6.0.tar.gz)
 FILENAME_IMAGE="image-$OS-$PATH_WORK-$VERSION.tar.gz"
 FULLNAME_IMAGE="./docker/${FILENAME_IMAGE}"
-#Docker container name
+#Docker container name container-ubuntu18.04-ffmpeg-mlu-v1.4.0
 MY_CONTAINER="container-$OS-$PATH_WORK-$VERSION"
 
 #Font color

@@ -11,12 +11,12 @@ FROM ubuntu:18.04
 
 MAINTAINER CambriconKnight <cambricon_knight@163.com>
 
-ARG cntoolkit_package=cntoolkit_1.7.5-1.ubuntu18.04_amd64.deb
+ARG cntoolkit_version=cntoolkit_1.7.5
+ARG cntoolkit_package=${cntoolkit_version}-1.ubuntu18.04_amd64.deb
 ARG mlu_platform=MLU270
 ARG with_cntoolkit_installed=yes
 
 ARG cncv_package=cncv_0.4.602-1.ubuntu18.04_amd64.deb
-ARG mlu_platform=MLU270
 ARG with_cncv_installed=yes
 
 # 1.Sync files
@@ -39,20 +39,25 @@ RUN echo "${TIME_ZONE}" > /etc/timezone && \
 
 # 4.Sync files for ffmpeg-mlu
 WORKDIR /root/ffmpeg-mlu/
-#COPY . /root/ffmpeg-mlu/
 COPY ./ffmpeg-mlu /root/ffmpeg-mlu/
 
-RUN if [ "$with_cntoolkit_installed" = "yes" ]; then dpkg -i /root/ffmpeg-mlu/$cntoolkit_package \
-    && apt -o Accquire::AllowInsecureRepositories=true update \
-    && apt install -y cndev cndrv cnrt cncodec \
-    && rm -rf /root/ffmpeg-mlu/$cntoolkit_package; fi
+#RUN if [ "$with_cntoolkit_installed" = "yes" ]; then dpkg -i /root/ffmpeg-mlu/$cntoolkit_package \
+#    && apt -o Accquire::AllowInsecureRepositories=true update \
+#    && dpkg -i /var/${cntoolkit_version}/cndev*.deb \
+#    && dpkg -i /var/${cntoolkit_version}/cnbin*.deb \
+#    && dpkg -i /var/${cntoolkit_version}/cndrv*.deb \
+#    && dpkg -i /var/${cntoolkit_version}/cnrt_*.deb \
+#    && dpkg -i /var/${cntoolkit_version}/cncodec*.deb \
+##    && apt install -y cndev cnbin cndrv cnrt cncodec* \
+##    && apt install -y cntoolkit-cloud cntoolkit-edge \
+#    && rm -rf /root/ffmpeg-mlu/$cntoolkit_package; fi
 
+RUN if [ "$with_cntoolkit_installed" = "yes" ]; then bash ./install_cntoolkit.sh ${cntoolkit_package};fi
 RUN if [ "$with_cncv_installed" = "yes" ]; then dpkg -i /root/ffmpeg-mlu/$cncv_package \
     && rm -rf /root/ffmpeg-mlu/$cncv_package; fi
 
 # 5.Pre-installed software
-#COPY ./docker/build-ffmpeg-mlu.sh /root/ffmpeg-mlu/
-RUN bash ./build-ffmpeg-mlu.sh
+RUN bash ./build-ffmpeg-mlu.sh ${mlu_platform}
 
 # 6.Set WorkDir
 ENV NEUWARE_HOME=/usr/local/neuware

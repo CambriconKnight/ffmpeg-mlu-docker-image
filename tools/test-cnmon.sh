@@ -15,6 +15,11 @@ TIMESLEEP=1
 DEMO_NAME="demo"
 CMD_TIME=$(date +%Y%m%d%H%M%S.%N)
 LOG_PACH="log"
+DEVICE_ID=$1
+if [[ $# -eq 0 ]];then
+    echo "Error: You must provide a card number as \$1"
+    exit 0
+fi
 if [ ! -d $LOG_PACH ];then
     mkdir -p $LOG_PACH
 fi
@@ -26,9 +31,9 @@ do
     date >> ${LOG_FILENAME};
     sleep 1;
     echo "=====================";
-    cnmon info | grep -E "Video Codec|MLU|Cluster|Board|Device CPU Chip|DDR";
+    cnmon info -c ${DEVICE_ID} | grep -E "Video|Board|Device CPU Chip|DDR";
     sleep 0.5;
-    cnmon info | grep -E "Video Codec|MLU|Cluster|Board|Device CPU Chip|DDR" >> ${LOG_FILENAME};
+    cnmon info -c ${DEVICE_ID} | grep -E "Video|Board|Device CPU Chip|DDR" >> ${LOG_FILENAME};
     #cnmon >> ${LOG_FILENAME};
     sleep 1;
     echo "=====================" >> $LOG_FILENAME;

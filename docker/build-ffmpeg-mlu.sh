@@ -23,6 +23,26 @@ white="\033[1;37m"
 PATH_WORK="ffmpeg-mlu"
 WORK_DIR="/root/ffmpeg-mlu"
 FILENAME_FFMPEG_MLU="ffmpeg-mlu-master.tar.gz"
+MLU_PLATFORM="$1"
+PARAM_NUM=$#
+function helper() {
+   echo ""
+   echo "***** ffmpeg compile script instructions *****"
+   echo " $0 <mlu_platform> <neuware_home>"
+   echo "    <mlu_platform>: Required. Choose from MLU200 or MLU370, depending on your situation"
+   echo ""
+   echo "    e.g. if your hardware platform is MLU200, use this:"
+   echo "      $0 MLU200"
+   echo "    e.g. if your hardware platform is MLU370, use this:"
+   echo "      $0 MLU370"
+   echo "**********************************************"
+   echo ""
+}
+
+if [ ${PARAM_NUM} -ne 1 ] && [ ${PARAM_NUM} -ne 2 ];then
+   helper
+   exit 0
+fi
 #############################################################
 # 1. Compile and install FFmpeg-MLU
 ## 1.1. Download FFmpeg-MLU
@@ -45,16 +65,6 @@ else
     else
         echo "Directory($PATH_WORK_TMP): Exists!"
     fi
-
-    ## 1.2. Download FFmpeg
-    pushd $PATH_WORK_TMP
-    git clone https://gitee.com/mirrors/ffmpeg.git -b release/4.2 --depth=1
-    popd
-
-    ## 1.3 Patch
-    pushd $PATH_WORK_TMP/ffmpeg
-    git apply ../ffmpeg4.2_mlu.patch
-    popd
 fi
 
 ## 1.4. 设置环境变量
@@ -62,24 +72,11 @@ export NEUWARE_HOME=/usr/local/neuware
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${NEUWARE_HOME}/lib64
 
 ## 1.5. 编译FFmpeg-MLU
-pushd $PATH_WORK_TMP/ffmpeg
-./configure  --enable-gpl \
-                --extra-cflags="-I${NEUWARE_HOME}/include" \
-                --extra-ldflags="-L${NEUWARE_HOME}/lib64" \
-                --extra-libs="-lcncodec -lcnrt -ldl -lcndrv" \
-                --enable-ffplay \
-                --enable-ffmpeg \
-                --enable-mlumpp \
-                --enable-gpl \
-                --enable-version3 \
-                --enable-nonfree \
-                --disable-static \
-                --enable-shared \
-                --disable-debug \
-                --enable-stripping \
-                --enable-optimizations \
-                --enable-avresample
-make -j4 && make install
+pushd $PATH_WORK_TMP
+#删除--prefix选项是配置安装的路径,将FFmpeg—MLU直接安装到系统目录下
+sed -i '/--prefix=/d' ./compile_ffmpeg.sh
+#使用FFmpeg-MLU自带的编译脚本进行编译
+./compile_ffmpeg.sh ${MLU_PLATFORM}
 popd
 
 ## 1.6. 编译FFmpeg-mlu依赖库

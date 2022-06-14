@@ -1,8 +1,11 @@
 #!/bin/bash
 set -e
 
-# Source env
-source "./env.sh"
+#Dockerfile(16.04/18.04/CentOS)
+OSVer="18.04"
+if [[ $# -ne 0 ]];then OSVer="${1}";fi
+# 0. Source env
+source ./env.sh $OSVer
 
 # 1.PATH_WORK
 sudo rm -rvf ${PATH_WORK}

@@ -11,7 +11,8 @@ FROM ubuntu:16.04
 
 MAINTAINER CambriconKnight <cambricon_knight@163.com>
 
-ARG cntoolkit_package=cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb
+ARG cntoolkit_version=cntoolkit_1.7.5
+ARG cntoolkit_package=${cntoolkit_version}-1.ubuntu18.04_amd64.deb
 ARG mlu_platform=MLU270
 ARG with_cntoolkit_installed=yes
 

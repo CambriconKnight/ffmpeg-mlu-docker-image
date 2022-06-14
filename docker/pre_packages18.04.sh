@@ -2,8 +2,8 @@
 #
 #echo -e 'nameserver 114.114.114.114' > /etc/resolv.conf
 mkdir -p /root/.pip/
-cp pip.conf /root/.pip/
-cp sources_18.04.list /etc/apt/sources.list
+cp -rvf pip.conf /root/.pip/
+cp -rvf sources_18.04.list /etc/apt/sources.list
 #add-apt-repository ppa:jonathonf/python-3.7
 DEBIAN_FRONTEND=noninteractive
 rm -rf /var/lib/apt/lists/* \
@@ -34,7 +34,7 @@ rm -rf /var/lib/apt/lists/* \
     && ln -s /usr/bin/python3 /usr/bin/python -f
 
     #pip2&pip3安装。 第三方依赖包列表可在 PyTorch 源码主目录下的 requirements.txt 中查询。
-    python -m pip install --upgrade pip \
-    && pip3 install -r requirements.txt \
+    python -m pip install --user --upgrade pip \
+    && pip3 install --user -r requirements.txt \
     && apt-get clean \
     && echo -e "\033[0;32m[pip install -r requirements.txt... Done] \033[0m"
