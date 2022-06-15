@@ -18,8 +18,8 @@
 
 | 名称            | 数量       | 备注                |
 | :-------------- | :--------- | :------------------ |
-| 开发主机/服务器 | 一台       |主流配置即可；电源功率大于500W；PCIe Gen.3 x16 |
-| MLU270-F4/S4    | 一套       |使用板卡自带的8pin连接器连接主机电源|
+| 开发主机/服务器 | 一台       |主流配置即可；电源功率按需配置；PCIe Gen.3 x16/Gen.4 x16 |
+| MLU270/MLU370    | 一套       |使用板卡自带的8pin连接器连接主机电源|
 
 ## 1.2. 软件环境准备
 
@@ -29,14 +29,15 @@
 | Driver_MLU270         | neuware-mlu270-driver-dkms_4.9.8_all.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/Driver/neuware-mlu270-driver-dkms_4.9.8_all.deb)   |
 | CNToolkit_MLU270      | cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb   | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNToolkit/cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb)   |
 | CNCV_MLU270           | cncv_0.4.602-1.ubuntu16.04_amd64.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNCV/cncv_0.4.602-1.ubuntu16.04_amd64.deb)   |
+| Driver_MLU370         | cambricon-mlu-driver-ubuntu18.04-dkms_4.20.7_amd64.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/MLU370/inference/1.4.0/driver_v4.20.7/Ubuntu/18.04/cambricon-mlu-driver-ubuntu18.04-dkms_4.20.7_amd64.deb)   |
+| CNToolkit_MLU370      | cntoolkit_2.8.1-1.ubuntu18.04_amd64.deb   | [手动下载](ftp://username@download.cambricon.com:8821/product/MLU370/inference/1.4.0/cntoolkit_v2.8.1/Ubuntu/18.04/cntoolkit_2.8.1-1.ubuntu18.04_amd64.deb)   |
+| CNCV_MLU370           | cncv_0.10.0-1.ubuntu18.04_amd64.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/MLU370/inference/1.4.0/cncv_v0.10.0/Ubuntu/18.04/cncv_0.10.0-1.ubuntu18.04_amd64.deb)   |
 | FFmpeg-MLU            | FFmpeg-MLU   | 自动[下载](https://github.com/Cambricon/ffmpeg-mlu)    |
 | FFmpeg                | FFmpeg   | 自动[下载](https://gitee.com/mirrors/ffmpeg.git)    |
 
 *以上软件包涉及FTP手动下载的,可下载到本地[dependent_files](./dependent_files)目录下,方便对应以下步骤中的提示操作。*
 
 ## 1.3. 资料下载
-
-Ubuntu16.04: http://mirrors.aliyun.com/ubuntu-releases/16.04
 
 Ubuntu18.04: http://mirrors.aliyun.com/ubuntu-releases/18.04
 
