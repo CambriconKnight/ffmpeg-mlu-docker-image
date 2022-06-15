@@ -8,6 +8,10 @@
 
 本工具集主要基于Docker容器进行[FFmpeg-MLU](https://github.com/Cambricon/ffmpeg-mlu)环境搭建与验证。力求压缩寒武纪FFmpeg-MLU环境搭建与功能验证的时间成本, 以便快速上手寒武纪FFmpeg-MLU。
 
+<p align="left">
+    <img alt="ffmpeg-mlu" src="./res/ffmpeg-mlu-docker-image-1.png" height="360" />
+</p>
+
 *本工具集仅用于个人学习，打通流程； 不对效果负责，不承诺商用。*
 
 **说明:**
