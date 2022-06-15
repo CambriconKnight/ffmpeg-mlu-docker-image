@@ -19,7 +19,7 @@
 | 名称            | 数量       | 备注                |
 | :-------------- | :--------- | :------------------ |
 | 开发主机/服务器 | 一台       |主流配置即可；电源功率按需配置；PCIe Gen.3 x16/Gen.4 x16 |
-| MLU270/MLU370    | 一套       |使用板卡自带的8pin连接器连接主机电源|
+| MLU270/MLU370    | 一套       |  |
 
 ## 1.2. 软件环境准备
 
@@ -38,8 +38,6 @@
 *以上软件包涉及FTP手动下载的,可下载到本地[dependent_files](./dependent_files)目录下,方便对应以下步骤中的提示操作。*
 
 ## 1.3. 资料下载
-
-Ubuntu18.04: http://mirrors.aliyun.com/ubuntu-releases/18.04
 
 MLU开发文档: https://developer.cambricon.com/index/document/index/classid/3.html
 
