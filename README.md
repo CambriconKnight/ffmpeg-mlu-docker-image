@@ -26,9 +26,11 @@
 | 名称                   | 版本/文件                                    | 备注            |
 | :-------------------- | :-------------------------------             | :--------------- |
 | Linux OS              | Ubuntu16.04/Ubuntu18.04/CentOS7   | 宿主机操作系统   |
+| 以下为MLU270软件依赖包           |  |  |
 | Driver_MLU270         | neuware-mlu270-driver-dkms_4.9.8_all.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/Driver/neuware-mlu270-driver-dkms_4.9.8_all.deb)   |
 | CNToolkit_MLU270      | cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb   | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNToolkit/cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb)   |
 | CNCV_MLU270           | cncv_0.4.602-1.ubuntu16.04_amd64.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNCV/cncv_0.4.602-1.ubuntu16.04_amd64.deb)   |
+| 以下为MLU370软件依赖包           |  |  |
 | Driver_MLU370         | cambricon-mlu-driver-ubuntu18.04-dkms_4.20.7_amd64.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/MLU370/inference/1.4.0/driver_v4.20.7/Ubuntu/18.04/cambricon-mlu-driver-ubuntu18.04-dkms_4.20.7_amd64.deb)   |
 | CNToolkit_MLU370      | cntoolkit_2.8.1-1.ubuntu18.04_amd64.deb   | [手动下载](ftp://username@download.cambricon.com:8821/product/MLU370/inference/1.4.0/cntoolkit_v2.8.1/Ubuntu/18.04/cntoolkit_2.8.1-1.ubuntu18.04_amd64.deb)   |
 | CNCV_MLU370           | cncv_0.10.0-1.ubuntu18.04_amd64.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/MLU370/inference/1.4.0/cncv_v0.10.0/Ubuntu/18.04/cncv_0.10.0-1.ubuntu18.04_amd64.deb)   |
