@@ -116,6 +116,9 @@ git clone https://github.com/CambriconKnight/ffmpeg-mlu-docker-image.git
 ```
 
 # 7. 测试验证
+
+*以下测试验证步骤都是基于Docker容器内环境.*
+
 ## 7.1. MLU解码
 ```bash
 #基于 FFMPEG 命令行方式验证多路并行解码, 可用于上手阶段压测MLU板卡硬件解码能力.
