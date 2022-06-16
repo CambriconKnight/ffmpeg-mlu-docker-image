@@ -3,7 +3,7 @@ set -e
 # -------------------------------------------------------------------------------
 # Filename:     test-ffmpeg-mlu-cmd.sh
 # UpdateDate:   2022/03/21
-# Description:  Test ffmpeg-mlu based on command mode.
+# Description:  基于 FFMPEG 命令行方式验证MLU转码功能, 可用于上手阶段.
 # Example:      ./test-ffmpeg-mlu-cmd.sh
 # Depends:
 #               Driver(ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/Driver/neuware-mlu270-driver-dkms_4.9.8_all.deb)

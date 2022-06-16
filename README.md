@@ -51,7 +51,7 @@ Neuware SDK: https://cair.cambricon.com/#/home/catalog?type=SDK%20Release
 
 其他开发资料, 可前往[寒武纪开发者社区](https://developer.cambricon.com)注册账号按需下载。也可在官方提供的专属FTP账户指定路径下载。
 
-# 2. Structure
+# 2. 目录结构
 
 *当前仓库默认基于Docker 进行FFmpeg-MLU 环境搭建与验证。按照以下章节步骤即可快速实现FFmpeg-MLU环境搭建与验证*
 
@@ -92,33 +92,46 @@ Neuware SDK: https://cair.cambricon.com/#/home/catalog?type=SDK%20Release
 │   └── sources_16.04.list              #Ubuntu16.04 sources文件
 ```
 
-# 3. Clone
+# 3. 代码下载
 ```bash
 git clone https://github.com/CambriconKnight/ffmpeg-mlu-docker-image.git
 ```
 
-# 4. Build
+# 4. 编译镜像
 ```bash
 #编译 ffmpeg-mlu 镜像
 ./build-image-ffmpeg-mlu.sh
 ```
 
-# 5. Load
+# 5. 加载镜像
 ```bash
 #加载Docker镜像
 ./load-image-ffmpeg-mlu.sh
 ```
 
-# 6. Run
+# 6. 启动容器
 ```bash
 #启动Docker容器
 ./run-container-ffmpeg-mlu.sh
 ```
 
-# 7.Test
+# 7. 测试验证
+## 7.1. MLU解码
 ```bash
-#执行测试脚本
-#转码验证
+#基于 FFMPEG 命令行方式验证多路并行解码, 可用于上手阶段压测MLU板卡硬件解码能力.
+cd /home/share/test/cmd
+./test-ffmpeg-mlu-cmd-decode.sh
+```
+
+## 7.2. MLU编码
+```bash
+#基于 FFMPEG 命令行方式验证多路并行编码, 可用于上手阶段压测MLU板卡硬件编码能力.
+cd /home/share/test/cmd
+./test-ffmpeg-mlu-cmd-encode.sh
+```
+
+## 7.3. MLU转码
+```bash
 #基于FFMPEG转码有两种方式
 #1、命令行方式
 cd /home/share/test/cmd

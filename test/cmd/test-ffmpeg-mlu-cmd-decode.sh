@@ -3,7 +3,7 @@ set -e
 # -------------------------------------------------------------------------------
 # Filename:     test-ffmpeg-mlu-cmd-decode.sh
 # UpdateDate:   2022/06/14
-# Description:  Test ffmpeg-mlu based on command mode.
+# Description:  基于 FFMPEG 命令行方式验证多路并行解码, 可用于上手阶段压测MLU板卡硬件解码能力.
 # Example:      ./test-ffmpeg-mlu-cmd-decode.sh
 # Depends:
 #               Driver(ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/Driver/neuware-mlu270-driver-dkms_4.9.8_all.deb)
@@ -11,7 +11,7 @@ set -e
 #               CNCV(ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNCV/cncv_0.4.602-1.ubuntu16.04_amd64.deb)
 #               FFmpeg-MLU(https://github.com/Cambricon/ffmpeg-mlu)
 #               FFmpeg(https://gitee.com/mirrors/ffmpeg.git -b release/4.2 --depth=1)
-# Notes:
+# Notes:        多路并行测试时,尽量选用时间长一些的视频文件, 以避免多路启动先后顺序造成压测力度不够.
 # -------------------------------------------------------------------------------
 #Font color
 none="\033[0m"
