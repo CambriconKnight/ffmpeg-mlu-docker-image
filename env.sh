@@ -46,7 +46,7 @@ NAME_IMAGE="$MY_IMAGE:$VERSION"
 FILENAME_IMAGE="image-$OS-$PATH_WORK-$VERSION.tar.gz"
 FULLNAME_IMAGE="./docker/${FILENAME_IMAGE}"
 #Docker container name container-ubuntu18.04-ffmpeg-mlu-v1.4.0
-MY_CONTAINER="container-$OS-$PATH_WORK-$VERSION"
+MY_CONTAINER="container-$OS-$PATH_WORK-$VERSION-$ORG"
 
 #Font color
 none="\033[0m"

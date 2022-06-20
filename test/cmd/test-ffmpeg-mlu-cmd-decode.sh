@@ -45,13 +45,14 @@ ffmpeg_mlu_cmd_decode() {
     while((i <= $CHANNEL_NUM))
     do
         #ffmpeg -y -vsync 0 -c:v h264_mludec -device_id 0 -i ../data/jellyfish-3-mbps-hd-h264.mkv -f null -< /dev/null >> mludec_Process1.log 2>&1 &
-        ffmpeg -y -vsync 0 -threads 1 -c:v ${TYPE_CODE} -device_id ${DEVICE_ID} -i ${VIDEO} -f null -< /dev/null >> ./${LOG_PACH}/mludec_Process${i}.log 2>&1 &
+        ffmpeg -y -vsync 0 -threads 1 -c:v ${TYPE_CODE} -hwaccel mlu -hwaccel_output_format mlu -hwaccel_device ${DEVICE_ID} -device_id ${DEVICE_ID} -i ${VIDEO} -f null -< /dev/null >> ./${LOG_PACH}/mludec_Process${i}.log 2>&1 &
         let "i+=1"
     done
     # -y（全局参数） 覆盖输出文件而不询问。
     # -vsync 0
     # -c [：stream_specifier] codec（输入/输出，每个流） 选择一个编码器（当在输出文件之前使用）或×××（当在输入文件之前使用时）用于一个或多个流。codec 是×××/编码器的名称或 copy（仅输出）以指示该流不被重新编码。如：ffmpeg -i INPUT -map 0 -c:v libx264 -c:a copy OUTPUT
     # -c:v 与参数 -vcodec 一样，表示视频编码器。c 是 codec 的缩写，v 是video的缩写。
+    # -hwaccel 使用hwaccel 硬件加速模式，解码h264 码流，不涉及host 侧和device 侧之间的数据拷贝，全程在设备侧进行。关联参数有hwaccel_output_format&hwaccel_device
     # -device_id 选择使用的加速卡。支持设置的值的范围为：0 - INT_MAX。其中 INT_MAX 为加速卡总数减1。默认值为 0。
     # -i url（输入） 输入文件的网址
     # -f null
