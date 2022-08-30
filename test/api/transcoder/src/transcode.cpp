@@ -52,6 +52,8 @@ int Transcode::init_filter(std::string filter_desc) {
     enum AVPixelFormat pix_fmts[] = {AV_PIX_FMT_RGB24, AV_PIX_FMT_NONE};
     AVBufferSinkParams *buffersink_params;
     filter_graph = avfilter_graph_alloc();
+    //nb_threads设置解码器线程数,默认是不需要设置的,即自适应,可能会消耗一些线程数量.
+    filter_graph->nb_threads = 1;
     //buffer video source
     snprintf(args, sizeof(args),
              "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",
@@ -186,6 +188,8 @@ int Transcode::init_decoder(std::string source, int device_id) {
         av_dict_set_int(&d_avdict, "stride_align", STRIDE_ALIGN, 0);
         // av_dict_set(&d_avdict, "resize", "960x540", 0);
     }
+    //thread_count设置解码器线程数,默认是不需要设置的,即自适应,可能会消耗一些线程数量.
+    decoder_ctx->thread_count = 1;
     if ((ret = avcodec_open2(decoder_ctx, dec, &d_avdict)) < 0) {
         printf("Failed to open codec for decoding, Error code: %d\n", ret);
         return ret;
@@ -245,6 +249,8 @@ int Transcode::init_encoder(std::string outputfile,
         av_dict_set_int(&e_avdict, "device_id", dev_id_, 0);
         av_dict_set_int(&d_avdict, "stride_align", STRIDE_ALIGN, 0);
     }
+    //thread_count设置解码器线程数,默认是不需要设置的,即自适应,可能会消耗一些线程数量.
+    encoder_ctx->thread_count = 1;
     if ((ret = avcodec_open2(encoder_ctx, enc, &e_avdict)) < 0) {
         fprintf(stderr, "Failed to open encode codec. "
                         "Error code: %d\n", ret );
