@@ -28,11 +28,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${NEUWARE_HOME}/lib64
 
 # 2. 基于FFMPEG API方式验证MLU转码功能
 # 2.1. 执行
-#Usage: ./transcoder_vid2vid <file_path> <dst_w> <dst_h> <device_id> <thread_num> <save_flag>
-./transcoder_vid2vid ../../data/test.mp4 352 288 0 1 1
-#./transcoder_vid2vid ../../data/A002.mp4 352 288 0 50 0
-#./transcoder_vid2vid rtsp://username1:password1@10.100.9.70:8554/cars-6.mkv 352 288 0 1 0
+./demo ./input.txt
 echo -e "${green}"
-# 2.2. 查看转码后的视频文件
-ls -lh ./_thread_*.h264
 echo -e "[Test ffmpeg-mlu ... Done] ${none}"

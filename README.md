@@ -35,9 +35,9 @@
 | CNToolkit_MLU270      | cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb   | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNToolkit/cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb)   |
 | CNCV_MLU270           | cncv_0.4.602-1.ubuntu16.04_amd64.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNCV/cncv_0.4.602-1.ubuntu16.04_amd64.deb)   |
 | 以下为MLU370软件依赖包           |  |  |
-| Driver_MLU370         | cambricon-mlu-driver-ubuntu18.04-dkms_4.20.7_amd64.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/MLU370/inference/1.4.0/driver_v4.20.7/Ubuntu/18.04/cambricon-mlu-driver-ubuntu18.04-dkms_4.20.7_amd64.deb)   |
-| CNToolkit_MLU370      | cntoolkit_2.8.1-1.ubuntu18.04_amd64.deb   | [手动下载](ftp://username@download.cambricon.com:8821/product/MLU370/inference/1.4.0/cntoolkit_v2.8.1/Ubuntu/18.04/cntoolkit_2.8.1-1.ubuntu18.04_amd64.deb)   |
-| CNCV_MLU370           | cncv_0.10.0-1.ubuntu18.04_amd64.deb    | [手动下载](ftp://username@download.cambricon.com:8821/product/MLU370/inference/1.4.0/cncv_v0.10.0/Ubuntu/18.04/cncv_0.10.0-1.ubuntu18.04_amd64.deb)   |
+| Driver_MLU370         | cambricon-mlu-driver-ubuntu18.04-dkms_4.20.17_amd64.deb    | [手动下载](ftp://lenovogch@download.cambricon.com:8821/product/MLU370/inference/1.8.0/driver_v4.20.17)   |
+| CNToolkit_MLU370      | cntoolkit_3.1.2-1.ubuntu18.04_amd64.deb   | [手动下载](ftp://lenovogch@download.cambricon.com:8821/product/MLU370/inference/1.8.0/cntoolkit_v3.1.2)   |
+| CNCV_MLU370           | cncv_1.0.0-1.ubuntu18.04_amd64.deb    | [手动下载](ftp://lenovogch@download.cambricon.com:8821/product/MLU370/inference/1.8.0/cncv_v1.0.0)   |
 | FFmpeg-MLU            | FFmpeg-MLU   | 自动[下载](https://github.com/Cambricon/ffmpeg-mlu)    |
 | FFmpeg                | FFmpeg   | 自动[下载](https://gitee.com/mirrors/ffmpeg.git)    |
 

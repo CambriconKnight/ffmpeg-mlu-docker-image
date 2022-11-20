@@ -9,7 +9,7 @@ CXX=g++
 SRCS=$(wildcard ./src/*.cpp)
 OBJS=$(SRCS:%.cpp=%.o)
 
-TARGET=transcode
+TARGET=demo
 
 all:$(TARGET)
 $(TARGET):$(OBJS)

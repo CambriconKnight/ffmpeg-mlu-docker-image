@@ -48,6 +48,11 @@ fi
 ## 1.1. Download FFmpeg-MLU
 cd $WORK_DIR
 PATH_WORK_TMP="ffmpeg-mlu"
+#Github clone 指定分支及commit的代码,避免版本更新迭代造成不兼容.
+GITHUB_URL="https://github.com/Cambricon/ffmpeg-mlu.git"
+GITHUB_Branch="master"
+#GITHUB_Commit="aa5e6ebc0afbde70f918ef79aa3b00d888db7864"
+GITHUB_Commit="46f127071e697833f2147b5fd2149c6e6ed4e1b6"
 if [ -f "${FILENAME_FFMPEG_MLU}" ];then
     echo -e "${green}File(${FILENAME_FFMPEG_MLU}): Exists!${none}"
     # $FILENAME_FFMPEG_MLU 压缩包中已经包含了ffmpeg-mlu补丁 + ffmpeg4.2
@@ -61,7 +66,8 @@ else
     echo -e "${green}3.Downloading automatically......${none}"
 
     if [ ! -d "${PATH_WORK_TMP}" ];then
-        git clone https://github.com/Cambricon/ffmpeg-mlu
+        git clone ${GITHUB_URL} -b ${GITHUB_Branch}
+        cd ${PATH_WORK_TMP} && git checkout ${GITHUB_Commit} && cd -
     else
         echo "Directory($PATH_WORK_TMP): Exists!"
     fi

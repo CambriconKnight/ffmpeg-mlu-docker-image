@@ -3,5 +3,6 @@ set -e
 
 # 1.rm
 make clean
-rm -vf ./transcode_*.mp4
+#rm -vf ./*.mp4
+rm -vf ./core.*
 ls -la

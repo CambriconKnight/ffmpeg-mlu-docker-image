@@ -9,7 +9,7 @@ CXX=g++
 SRCS=$(wildcard ./src/*.cpp)
 OBJS=$(SRCS:%.cpp=%.o)
 
-TARGET=transcoder_vid2vid
+TARGET=demo
 
 all:$(TARGET)
 $(TARGET):$(OBJS)

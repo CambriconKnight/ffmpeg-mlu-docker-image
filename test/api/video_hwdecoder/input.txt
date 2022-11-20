@@ -1,0 +1,12 @@
+# your args (thread_id inputfile_path dev_id save_flag)
+#thread0 jellyfish-3-mbps-hd-h264.mkv 0 1
+thread0 ../../data/test.mp4 0 1
+thread0 ../../data/test.mp4 0 1
+thread0 ../../data/test.mp4 0 1
+thread0 ../../data/test.mp4 0 1
+thread0 ../../data/test.mp4 0 1
+thread0 ../../data/test.mp4 0 1
+thread0 ../../data/test.mp4 0 1
+thread0 ../../data/test.mp4 0 1
+thread0 ../../data/test.mp4 0 1
+thread0 ../../data/test.mp4 0 1

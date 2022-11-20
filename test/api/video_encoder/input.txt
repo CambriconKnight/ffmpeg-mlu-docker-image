@@ -1,0 +1,5 @@
+#enc_params| bit_rate value | b_frame value | gop_size value | rc_mode value | profile value | level value | quality value | q_min value | q_max value
+enc_params bit_rate 1M b_frame 1 gop_size 50 rc_mode vbr profile main level 5.1 quality 80 q_min 26 q_max 51
+
+#thread_id | inputfile | enc_type | enc_w | enc_h | enc_num | dev_id | save_flag
+thread0 ../../data/input.yuv h264 1920 1080 1000 0 0
