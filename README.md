@@ -43,6 +43,11 @@
 
 *以上软件包涉及FTP手动下载的,可下载到本地[dependent_files](./dependent_files)目录下,方便对应以下步骤中的提示操作。*
 
+*以上软件包也可关注微信公众号 【 AIKnight 】, 发送关键字 **FFmpeg-MLU** 自动获取,获取后放置到本地[dependent_files](./dependent_files)目录下,方便对应以下步骤中的提示操作。*
+
+**AIKnight公众号**
+>![](./res/aiknight_wechat_344.jpg)
+
 ## 1.3. 资料下载
 
 MLU开发文档: https://developer.cambricon.com/index/document/index/classid/3.html
