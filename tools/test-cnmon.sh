@@ -13,9 +13,9 @@
 #一个循环时间 = 4 * TimeSleep4Middle + TimeSleep4While
 TimeSleep4While=1
 TimeSleep4Middle=0.5
-StringGrep="Video|MLU|Cluster|Board|Device CPU Chip|DDR"
+StringGrep="Video|Board|Device CPU Chip|DDR"
 StringError="Error: You must provide [a card number]/[all] as \$1 "
-DEMO_NAME="demo"
+DEMO_NAME="ffmpeg"
 CMD_TIME=$(date +%Y%m%d%H%M%S.%N)
 LOG_PACH="log"
 DEVICE_ID="all"

@@ -119,9 +119,11 @@ git clone https://github.com/CambriconKnight/ffmpeg-mlu-docker-image.git
 #启动Docker容器
 ./run-container-ffmpeg-mlu.sh
 # 安装第三方库，根据实际网络环境情况，需要一定安装时间
-cd /home/share/docker/
+cp -rvf /home/share/docker/pre_packages18.04.sh /root/ffmpeg-mlu
+cd /root/ffmpeg-mlu
 ./pre_packages18.04.sh
 # 编译ffmpeg-mlu
+cp -rvf /home/share/docker/build-ffmpeg-mlu.sh /root/ffmpeg-mlu
 cd /root/ffmpeg-mlu
 ./build-ffmpeg-mlu.sh MLU370
 ```

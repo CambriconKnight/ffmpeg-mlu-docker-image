@@ -52,7 +52,8 @@ PATH_WORK_TMP="ffmpeg-mlu"
 GITHUB_URL="https://github.com/Cambricon/ffmpeg-mlu.git"
 GITHUB_Branch="master"
 #GITHUB_Commit="aa5e6ebc0afbde70f918ef79aa3b00d888db7864"
-GITHUB_Commit="46f127071e697833f2147b5fd2149c6e6ed4e1b6"
+#GITHUB_Commit="46f127071e697833f2147b5fd2149c6e6ed4e1b6"
+GITHUB_Commit="f5d6d5ca3bfaeb3f338cb76b6c45de461709b4f0"
 if [ -f "${FILENAME_FFMPEG_MLU}" ];then
     echo -e "${green}File(${FILENAME_FFMPEG_MLU}): Exists!${none}"
     # $FILENAME_FFMPEG_MLU 压缩包中已经包含了ffmpeg-mlu补丁 + ffmpeg4.2

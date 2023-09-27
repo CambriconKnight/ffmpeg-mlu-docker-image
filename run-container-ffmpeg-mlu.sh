@@ -49,8 +49,10 @@ if [ 0 -eq $num ];then
     sudo docker run -e DISPLAY=unix$DISPLAY --privileged=true \
         --device /dev/cambricon_dev0 \
         --net=host --ipc=host --pid=host \
+        -v /usr/bin/cnmon:/usr/bin/cnmon \
         -v /sys/kernel/debug:/sys/kernel/debug \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
+        -v /mnt/data/opt/share:/opt/share \
         -it -v $PATH_SHARE_HOST:$PATH_SHARE_DOCKER \
         -it -v $PATH_FTP_HOST:$PATH_FTP_DOCKER \
         -it -v $PATH_DATASETS_HOST:$PATH_DATASETS_DOCKER \
