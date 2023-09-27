@@ -1,9 +1,10 @@
 #!/bin/bash
 #
-#echo -e 'nameserver 114.114.114.114' > /etc/resolv.conf
+echo -e 'nameserver 114.114.114.114' > /etc/resolv.conf
 mkdir -p /root/.pip/
 cp -rvf pip.conf /root/.pip/
 cp -rvf sources_18.04.list /etc/apt/sources.list
+
 #add-apt-repository ppa:jonathonf/python-3.7
 DEBIAN_FRONTEND=noninteractive
 rm -rf /var/lib/apt/lists/* \

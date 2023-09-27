@@ -20,14 +20,14 @@ ARG cncv_package=cncv_0.4.602-1.ubuntu18.04_amd64.deb
 ARG with_cncv_installed=yes
 
 # 1.Sync files
-RUN echo -e 'nameserver 114.114.114.114' > /etc/resolv.conf
+#RUN echo -e 'nameserver 114.114.114.114' > /etc/resolv.conf
 COPY ./docker/* /temp/
 WORKDIR /temp/
 RUN cp sources_18.04.list /etc/apt/sources.list
 
 # 2.Pre-installed software
 ENV DEBIAN_FRONTEND=noninteractive
-RUN bash ./pre_packages18.04.sh
+#RUN bash ./pre_packages18.04.sh
 
 # 3.Set ENV && Clean
 ENV LANG C.UTF-8
@@ -53,11 +53,10 @@ COPY ./ffmpeg-mlu /root/ffmpeg-mlu/
 #    && rm -rf /root/ffmpeg-mlu/$cntoolkit_package; fi
 
 RUN if [ "$with_cntoolkit_installed" = "yes" ]; then bash ./install_cntoolkit.sh ${cntoolkit_package};fi
-RUN if [ "$with_cncv_installed" = "yes" ]; then dpkg -i /root/ffmpeg-mlu/$cncv_package \
-    && rm -rf /root/ffmpeg-mlu/$cncv_package; fi
+RUN if [ "$with_cncv_installed" = "yes" ]; then dpkg -i /root/ffmpeg-mlu/$cncv_package; fi
 
 # 5.Pre-installed software
-RUN bash ./build-ffmpeg-mlu.sh ${mlu_platform}
+#RUN bash ./build-ffmpeg-mlu.sh ${mlu_platform}
 
 # 6.Set WorkDir
 ENV NEUWARE_HOME=/usr/local/neuware
