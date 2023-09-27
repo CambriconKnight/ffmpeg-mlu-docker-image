@@ -122,6 +122,7 @@ git clone https://github.com/CambriconKnight/ffmpeg-mlu-docker-image.git
 cd /home/share/docker/
 ./pre_packages18.04.sh
 # 编译ffmpeg-mlu
+cd /root/ffmpeg-mlu
 ./build-ffmpeg-mlu.sh MLU370
 ```
 

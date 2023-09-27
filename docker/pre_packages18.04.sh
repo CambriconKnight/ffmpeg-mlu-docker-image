@@ -35,7 +35,7 @@ rm -rf /var/lib/apt/lists/* \
     && ln -s /usr/bin/python3 /usr/bin/python -f
 
     #pip2&pip3安装。 第三方依赖包列表可在 PyTorch 源码主目录下的 requirements.txt 中查询。
-    python -m pip install --user --upgrade pip \
-    && pip3 install --user -r requirements.txt \
-    && apt-get clean \
-    && echo -e "\033[0;32m[pip install -r requirements.txt... Done] \033[0m"
+    #python -m pip install --user --upgrade pip \
+    #&& pip3 install --user -r requirements.txt \
+    #&& apt-get clean \
+    #&& echo -e "\033[0;32m[pip install -r requirements.txt... Done] \033[0m"
