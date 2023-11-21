@@ -10,7 +10,7 @@
 #################### version ####################
 ## 以下信息,根据各个版本中文件实际名词填写.
 #Version
-VER="1.14.0"
+VER="1.15.0"
 #MLU_PLATFORM="MLU200"
 MLU_PLATFORM="MLU370"
 #Neuware SDK For MLU270(依操作系统选择)
@@ -23,8 +23,12 @@ MLU_PLATFORM="MLU370"
 ##ubuntu18.04 for MLU370
 #FILENAME_CNToolkit="cntoolkit_2.8.1-1.ubuntu18.04_amd64.deb"
 #FILENAME_CNCV="cncv_0.10.0-1.ubuntu18.04_amd64.deb"
-FILENAME_CNToolkit="cntoolkit_3.6.1-1.ubuntu18.04_amd64.deb"
-FILENAME_CNCV="cncv_2.2.0-1.ubuntu18.04_amd64.deb"
+# for 1.14.0
+#FILENAME_CNToolkit="cntoolkit_3.6.1-1.ubuntu18.04_amd64.deb"
+#FILENAME_CNCV="cncv_2.2.0-1.ubuntu18.04_amd64.deb"
+# for 1.15.0
+FILENAME_CNToolkit="cntoolkit_3.7.2-1.ubuntu18.04_amd64.deb"
+FILENAME_CNCV="cncv_2.3.0-1.ubuntu18.04_amd64.deb"
 #################### docker ####################
 #Work
 PATH_WORK="ffmpeg-mlu"

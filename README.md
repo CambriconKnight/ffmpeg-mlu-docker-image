@@ -107,6 +107,10 @@ git clone https://github.com/CambriconKnight/ffmpeg-mlu-docker-image.git
 #编译 ffmpeg-mlu 镜像
 ./build-image-ffmpeg-mlu.sh
 ```
+**编译镜像实例**
+<p align="left">
+    <img alt="ffmpeg-mlu_build_100ms" src="https://gitee.com/cambriconknight/dev-open-res/raw/main/ffmpeg-mlu-docker-image/res/ffmpeg-mlu_build_100ms.gif" width="640" />
+</p>
 
 # 5. 加载镜像
 ```bash
@@ -127,6 +131,10 @@ cp -rvf /home/share/docker/build-ffmpeg-mlu.sh /root/ffmpeg-mlu
 cd /root/ffmpeg-mlu
 ./build-ffmpeg-mlu.sh MLU370
 ```
+**编译FFMpeg-MLU实例**
+<p align="left">
+    <img alt="build-ffmpeg-mlu" src="https://gitee.com/cambriconknight/dev-open-res/raw/main/ffmpeg-mlu-docker-image/res/build-ffmpeg-mlu.gif" width="640" />
+</p>
 
 # 7. 测试验证
 
@@ -138,6 +146,10 @@ cd /root/ffmpeg-mlu
 cd /home/share/test/cmd
 ./test-ffmpeg-mlu-cmd-decode.sh
 ```
+**MLU解码实例-解码128路高清视频**
+<p align="left">
+    <img alt="test-ffmpeg-mlu-cmd-decode" src="https://gitee.com/cambriconknight/dev-open-res/raw/main/ffmpeg-mlu-docker-image/res/test-ffmpeg-mlu-cmd-decode.gif" width="640" />
+</p>
 
 ## 7.2. MLU编码
 ```bash
@@ -145,6 +157,10 @@ cd /home/share/test/cmd
 cd /home/share/test/cmd
 ./test-ffmpeg-mlu-cmd-encode.sh
 ```
+**MLU编码实例-编码24路高清视频**
+<p align="left">
+    <img alt="test-ffmpeg-mlu-cmd-encode" src="https://gitee.com/cambriconknight/dev-open-res/raw/main/ffmpeg-mlu-docker-image/res/test-ffmpeg-mlu-cmd-encode.gif" width="640" />
+</p>
 
 ## 7.3. MLU转码
 ```bash

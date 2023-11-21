@@ -82,3 +82,7 @@ sudo docker save -o $FILENAME_IMAGE $NAME_IMAGE
 sudo chmod 664 $FILENAME_IMAGE
 mv $FILENAME_IMAGE ./docker/
 ls -lh ./docker/$FILENAME_IMAGE
+#md5sum
+#cd ./docker
+#sudo md5sum ./$FILENAME_IMAGE > "./${FILENAME_IMAGE}.md5sum"
+#cd -

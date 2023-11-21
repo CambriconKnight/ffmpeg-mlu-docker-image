@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-echo -e 'nameserver 114.114.114.114' > /etc/resolv.conf
+echo -e 'nameserver 114.114.114.114' >> /etc/resolv.conf
+echo -e 'nameserver 8.8.8.8' >> /etc/resolv.conf
 mkdir -p /root/.pip/
 cp -rvf pip.conf /root/.pip/
 cp -rvf sources_18.04.list /etc/apt/sources.list
