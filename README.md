@@ -172,3 +172,26 @@ cd /home/share/test/cmd
 cd /home/share/test/api
 ./test-ffmpeg-mlu-api.sh
 ```
+
+# 8. 保存镜像
+保存镜像，供后续环境变更直接使用。
+```bash
+[username@worker1~/nfs/github/ffmpeg-mlu-docker-image]$sudo ./save-image-ffmpeg-mlu.sh
+[sudo] password for username:
+[# Docker images:
+username/ubuntu18.04-ffmpeg-mlu                                            v1.15.0                                               ec2351bca63c   About an hour ago   3.59GB
+   Images does not exist!
+[# Docker container:
+4f833ee85d89   username/ubuntu18.04-ffmpeg-mlu:v1.15.0                                                                   "/bin/bash"              58 minutes ago   Exited (0) 19 seconds ago             container-ubuntu18.04-ffmpeg-mlu-v1.15.0-username
+[# Commit docker container:
+sha256:a9823f8021cb33f8dba7238699152e70c398f4367267363da0c2cf91103e1441
+   Completed!
+[# Docker images:
+username/ubuntu18.04-ffmpeg-mlu                                            v1.15.0-20231121191123                                                                                                                               a9823f8021cb   1 second ago        6.02GB
+username/ubuntu18.04-ffmpeg-mlu                                            v1.15.0                                                                                                                                              ec2351bca63c   About an hour ago   3.59GB
+[# Save docker image:
+-rw------- 1 root root 5.7G Nov 21 19:14 image-ubuntu18.04-ffmpeg-mlu-v1.15.0-20231121191123.ta                                                                                               r.gz
+   Completed!
+[username@worker1~/nfs/github/ffmpeg-mlu-docker-image]$
+
+```
