@@ -4,6 +4,8 @@
     </a>
 </p>
 
+**该教程仅仅用于学习，打通流程； 不对效果负责，不承诺商用。**
+
 # 1. 概述
 
 本工具集主要基于Docker容器进行[FFmpeg-MLU](https://github.com/Cambricon/ffmpeg-mlu)环境搭建与验证。力求压缩寒武纪FFmpeg-MLU环境搭建与功能验证的时间成本, 以便快速上手寒武纪FFmpeg-MLU。
@@ -11,8 +13,6 @@
 <p align="left">
     <img alt="ffmpeg-mlu" src="./res/ffmpeg-mlu-docker-image-1.png" height="360" />
 </p>
-
-*本工具集仅用于个人学习，打通流程； 不对效果负责，不承诺商用。*
 
 **说明:**
 
@@ -183,19 +183,18 @@ cd /home/share/test/api
 [username@worker1~/nfs/github/ffmpeg-mlu-docker-image]$sudo ./save-image-ffmpeg-mlu.sh
 [sudo] password for username:
 [# Docker images:
-username/ubuntu18.04-ffmpeg-mlu                                            v1.15.0                                               ec2351bca63c   About an hour ago   3.59GB
+username/ubuntu18.04-ffmpeg-mlu    v1.15.0  ec2351bca63c   About an hour ago   3.59GB
    Images does not exist!
 [# Docker container:
-4f833ee85d89   username/ubuntu18.04-ffmpeg-mlu:v1.15.0                                                                   "/bin/bash"              58 minutes ago   Exited (0) 19 seconds ago             container-ubuntu18.04-ffmpeg-mlu-v1.15.0-username
+4f833ee85d89   username/ubuntu18.04-ffmpeg-mlu:v1.15.0    "/bin/bash"    58 minutes ago   Exited (0) 19 seconds ago   container-ubuntu18.04-ffmpeg-mlu-v1.15.0-username
 [# Commit docker container:
 sha256:a9823f8021cb33f8dba7238699152e70c398f4367267363da0c2cf91103e1441
    Completed!
 [# Docker images:
-username/ubuntu18.04-ffmpeg-mlu                                            v1.15.0-20231121191123                                                                                                                               a9823f8021cb   1 second ago        6.02GB
-username/ubuntu18.04-ffmpeg-mlu                                            v1.15.0                                                                                                                                              ec2351bca63c   About an hour ago   3.59GB
+username/ubuntu18.04-ffmpeg-mlu    v1.15.0-20231121191123    a9823f8021cb   1 second ago    6.02GB
+username/ubuntu18.04-ffmpeg-mlu    v1.15.0    ec2351bca63c   About an hour ago   3.59GB
 [# Save docker image:
--rw------- 1 root root 5.7G Nov 21 19:14 image-ubuntu18.04-ffmpeg-mlu-v1.15.0-20231121191123.ta                                                                                               r.gz
-   Completed!
+-rw------- 1 root root 5.7G Nov 21 19:14 image-ubuntu18.04-ffmpeg-mlu-v1.15.0-20231121191123.tar.gz  Completed!
 [username@worker1~/nfs/github/ffmpeg-mlu-docker-image]$
 
 ```
