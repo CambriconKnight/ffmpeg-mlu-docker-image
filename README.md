@@ -176,6 +176,10 @@ cd /home/share/test/api
 # 8. 保存镜像
 保存镜像，供后续环境变更直接使用。
 ```bash
+./save-image-ffmpeg-mlu.sh
+```
+**保存镜像实例**
+```bash
 [username@worker1~/nfs/github/ffmpeg-mlu-docker-image]$sudo ./save-image-ffmpeg-mlu.sh
 [sudo] password for username:
 [# Docker images:
