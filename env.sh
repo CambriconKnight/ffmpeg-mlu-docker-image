@@ -12,7 +12,7 @@
 #Version
 VER="1.15.0"
 #Suffix_FILENAME="-Test"
-Suffix_FILENAME="-Test"
+Suffix_FILENAME=""
 #Neuware SDK For MLU270(依操作系统选择)
 ##ubuntu16.04
 #FILENAME_CNToolkit="cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb"
