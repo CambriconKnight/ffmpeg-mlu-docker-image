@@ -11,8 +11,8 @@
 ## 以下信息,根据各个版本中文件实际名词填写.
 #Version
 VER="1.15.0"
-#MLU_PLATFORM="MLU200"
-MLU_PLATFORM="MLU370"
+#Suffix_FILENAME="-Test"
+Suffix_FILENAME="-Test"
 #Neuware SDK For MLU270(依操作系统选择)
 ##ubuntu16.04
 #FILENAME_CNToolkit="cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb"
@@ -34,12 +34,11 @@ FILENAME_CNCV="cncv_2.3.0-1.ubuntu18.04_amd64.deb"
 PATH_WORK="ffmpeg-mlu"
 #Dockerfile(16.04/18.04/CentOS)
 OSVer="18.04"
-if [[ $# -ne 0 ]];then OSVer="${1}";fi
 #(Dockerfile.16.04/Dockerfile.18.04/Dockerfile.CentOS)
 FILENAME_DOCKERFILE="Dockerfile.$OSVer"
 DIR_DOCKER="docker"
 #Version
-VERSION="v${VER}"
+VERSION="v${VER}${Suffix_FILENAME}"
 #Organization
 ORG="kang"
 #Operating system
