@@ -78,7 +78,6 @@ Neuware SDK: https://cair.cambricon.com/#/home/catalog?type=SDK%20Release
 │   ├── requirements.txt        #requirements文件
 │   ├── sources_18.04.list      #Ubuntu18.04 sources文件
 │   └── sources_16.04.list      #Ubuntu16.04 sources文件
-├
 ├── load-image-ffmpeg-mlu.sh    #加载Docker 镜像
 ├── README.md                   #README
 ├── res                         #资源图库

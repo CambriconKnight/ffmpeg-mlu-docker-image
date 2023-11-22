@@ -83,5 +83,5 @@ echo -e "${green}"
 #ls -lh *.log
 #tail -n 10 ./log/mluenc_Process*.log
 echo -e "[Monitor Video Encoder 10-11 On Host:]"
-echo -e "[cd ./tools && ./test-cnmon.sh 0] ${none}"
+echo -e "[cd ../../tools && ./test-cnmon.sh 0] ${none}"
 

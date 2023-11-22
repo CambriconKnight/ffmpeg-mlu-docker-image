@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 # -------------------------------------------------------------------------------
-# Filename:     test-ffmpeg-mlu-cmd-decode.sh
+# Filename:     test-ffmpeg-mlu-cmd-decode-plus.sh
 # UpdateDate:   2022/06/14
 # Description:  基于 FFMPEG 命令行方式验证多路并行解码, 可用于上手阶段压测MLU板卡硬件解码能力.
-# Example:      ./test-ffmpeg-mlu-cmd-decode.sh
+#               此plus脚本在运行核心业务过程中可以实时显示显示业务日志文件并记录到日志文件，并且还会打印cnmon相关信息到日志文件。
+# Example:      ./test-ffmpeg-mlu-cmd-decode-plus.sh [VideoFile] [DeviceID] [ChannelNum] [TypeCode]
+#               ./test-ffmpeg-mlu-cmd-decode-plus.sh ../data/jellyfish-3-mbps-hd-h264.mkv 0 128 h264_mludec
 # Depends:
 #               Driver(ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/Driver/neuware-mlu270-driver-dkms_4.9.8_all.deb)
 #               CNToolkit(ftp://username@download.cambricon.com:8821/product/GJD/MLU270/1.7.604/Ubuntu16.04/CNToolkit/cntoolkit_1.7.5-1.ubuntu16.04_amd64.deb)
@@ -45,8 +47,10 @@ ffmpeg_mlu_cmd_decode() {
     while((i <= $CHANNEL_NUM))
     do
         #ffmpeg -y -vsync 0 -c:v h264_mludec -device_id 0 -i ../data/jellyfish-3-mbps-hd-h264.mkv -f null -< /dev/null >> mludec_Process1.log 2>&1 &
-        ffmpeg -y -vsync 0 -threads 1 -c:v ${TYPE_CODE} -hwaccel mlu -hwaccel_output_format mlu -hwaccel_device ${DEVICE_ID} -device_id ${DEVICE_ID} -i ${VIDEO} -f null -< /dev/null >> ./${LOG_PACH}/mludec_Process${i}.log 2>&1 &
+        ffmpeg -y -vsync 0 -threads 1 -c:v ${TYPE_CODE} -hwaccel mlu -hwaccel_output_format mlu -hwaccel_device ${DEVICE_ID} -device_id ${DEVICE_ID} -i ${VIDEO} -f null -< /dev/null > ./${LOG_PACH}/mludec_Process${i}.log 2>&1 &
         let "i+=1"
+        #sleep 0.001
+        PID_LastProcess=$!
     done
     # -y（全局参数） 覆盖输出文件而不询问。
     # -vsync 0
@@ -64,7 +68,23 @@ export WORK_DIR="/root/ffmpeg-mlu"
 export NEUWARE_HOME=/usr/local/neuware
 export LD_LIBRARY_PATH=/usr/local/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${NEUWARE_HOME}/lib64
+PID_LastProcess=10000000000
+PID_CNMONProcess=10000000000
 
+# 检查参数
+# $1: VideoFile 视频文件/网址(多路并行测试时,尽量选用时间长一些的视频文件)
+# $2: DeviceID 设备ID(整数)
+# $3: ChannelNum 启动路数(整数)
+# $4: TypeCode 视频格式(编码: h264_mluenc,hevc_mluenc; 解码: h264_mludec,hevc_mludec;)
+
+if [[ $# -ne 4 ]];then
+    echo -e "\033[1;33m Usage: $0 [VideoFile] [DeviceID] [ChannelNum] [TypeCode] \033[0m"
+    exit -1
+fi
+VideoFile=$1
+DeviceID=$2
+ChannelNum=$3
+TypeCode=$4
 # 2. 基于FFMPEG命令行方式验证MLU转码功能
 # 2.1. 执行ffmpeg
 cd /home/share/test/cmd
@@ -73,12 +93,37 @@ cd /home/share/test/cmd
 #ffmpeg_mlu_cmd_decode ../data/jellyfish-3-mbps-hd-h264.mkv 0 64 h264_mludec
 #ffmpeg_mlu_cmd_decode ../data/jellyfish-3-mbps-hd-hevc.mkv 0 66 hevc_mludec
 # for 370
-ffmpeg_mlu_cmd_decode ../data/jellyfish-3-mbps-hd-h264.mkv 0 128 h264_mludec
+#ffmpeg_mlu_cmd_decode ../data/jellyfish-3-mbps-hd-h264.mkv 0 128 h264_mludec
 #ffmpeg_mlu_cmd_decode ../data/jellyfish-3-mbps-hd-hevc.mkv 0 132 hevc_mludec
-echo -e "${green}"
+#解码1080P@30fps;
+ffmpeg_mlu_cmd_decode ${VideoFile} ${DeviceID} ${ChannelNum} ${TypeCode}
+#实时记录cnmon关键信息
+StringGrep="Video|Board|Device CPU Chip|DDR"
+LOG_FILENAME="./log/mludec_cnmon.log"
+cnmon -c ${DeviceID} > ${LOG_FILENAME}; sleep 0.2;
+while true; do cnmon info -c ${DeviceID} | grep -E "${StringGrep}" >> ${LOG_FILENAME};sleep 0.2;cnmon -c ${DeviceID} >> ${LOG_FILENAME};sleep 0.2;done &
+PID_CNMONProcess=$!
+echo "PID_CNMONProcess: $PID_CNMONProcess"
 # 2.2、查看转码后的log文件
-#ls -lh *.log
-#tail -n 10 ./log/mludec_Process*.log
-echo -e "[Monitor Video Encoder 10-11 On Host:]"
-echo -e "[cd ../../tools && ./test-cnmon.sh 0] ${none}"
+#实时显示日志文件
+echo "PID_LastProcess: $PID_LastProcess"
+tail -f ./log/mludec_Process*.log --pid=$PID_LastProcess
+sleep 0.5
+#删除【实时记录cnmon关键信息】的进程
+kill -9 $PID_CNMONProcess
+sleep 0.5
+#######################################################
+#显示所有日志文件
+echo -e "${green}#####################################"
+echo -e "All log files: ./log/mludec_Process*.log"
+ls ./log/mludec_Process*.log
+#统计日志文件的个数
+Number_Log_Files=`ls -l ./log/mludec_Process*.log|grep "^-"|wc -l`
+echo -e "Number of log files: $Number_Log_Files"
+#统计日志文件的个数
+echo -e "PID_LastProcess: $PID_LastProcess"
+echo -e "PID_CNMONProcess: $PID_CNMONProcess"
+echo -e "[Monitor Video Decoder 0-3、5-9 On Host:]"
+echo -e "[cd ../../tools && ./test-cnmon.sh 0]"
+echo -e "#####################################${none}"
 
