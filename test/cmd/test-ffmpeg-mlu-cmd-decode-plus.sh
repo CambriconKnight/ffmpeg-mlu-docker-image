@@ -47,9 +47,10 @@ ffmpeg_mlu_cmd_decode() {
     while((i <= $CHANNEL_NUM))
     do
         #ffmpeg -y -vsync 0 -c:v h264_mludec -device_id 0 -i ../data/jellyfish-3-mbps-hd-h264.mkv -f null -< /dev/null >> mludec_Process1.log 2>&1 &
-        ffmpeg -y -vsync 0 -threads 1 -c:v ${TYPE_CODE} -hwaccel mlu -hwaccel_output_format mlu -hwaccel_device ${DEVICE_ID} -device_id ${DEVICE_ID} -i ${VIDEO} -f null -< /dev/null > ./${LOG_PACH}/mludec_Process${i}.log 2>&1 &
+        #ffmpeg -y -nostats -r 30 -vsync 0 -threads 1 -c:v ${TYPE_CODE} -hwaccel mlu -hwaccel_output_format mlu -hwaccel_device ${DEVICE_ID} -device_id ${DEVICE_ID} -i ${VIDEO} -f null -< /dev/null > ./${LOG_PACH}/mludec_Process${i}.log 2>&1 &
+        ffmpeg -y -r 30 -vsync 0 -threads 1 -c:v ${TYPE_CODE} -hwaccel mlu -hwaccel_output_format mlu -hwaccel_device ${DEVICE_ID} -device_id ${DEVICE_ID} -i ${VIDEO} -f null -< /dev/null > ./${LOG_PACH}/mludec_Process${i}.log 2>&1 &
         let "i+=1"
-        #sleep 0.001
+        #sleep 0.001 #不能加sleep，否则容易压不倒最大路数。
         PID_LastProcess=$!
     done
     # -y（全局参数） 覆盖输出文件而不询问。
@@ -60,8 +61,37 @@ ffmpeg_mlu_cmd_decode() {
     # -device_id 选择使用的加速卡。支持设置的值的范围为：0 - INT_MAX。其中 INT_MAX 为加速卡总数减1。默认值为 0。
     # -i url（输入） 输入文件的网址
     # -f null
+    # -loglevel info
+    # -nostats ：不输出视频相关信息
+    # -r 设定帧速率
 }
-
+watch_log_info() {
+    #实时显示日志文件
+    echo -e "All log files: ${1}"
+    echo "PID_LastProcess: $PID_LastProcess"
+    #sleep 0.2
+    tail -f ${1} --pid=$PID_LastProcess
+    sleep 0.1
+    #业务结束后删除【实时记录cnmon关键信息】的进程
+    #ps -aux | grep test-ffmpeg-mlu-cmd-decode
+    kill -9 $PID_CNMONProcess
+    sleep 0.1
+    #######################################################
+    #显示所有日志文件
+    echo -e "${green}#####################################"
+    echo -e "All log files: ${1}"
+    ls ${1}
+    #统计日志文件的个数
+    Number_Log_Files=`ls -l ${1}|grep "^-"|wc -l`
+    #echo -e "平均帧率: $Number_Log_Files"
+    echo -e "视频处理路数: $Number_Log_Files"
+    #统计相关进程信息，避免造成不受控制的僵尸进程
+    echo -e "PID_LastProcess: $PID_LastProcess"
+    echo -e "PID_CNMONProcess: $PID_CNMONProcess"
+    echo -e "[Monitor Video Decoder 0-3、5-9 On Host:]"
+    echo -e "[cd ../../tools && ./test-cnmon.sh 0]"
+    echo -e "#####################################${none}"
+}
 #############################################################
 # 1. 设置环境变量
 export WORK_DIR="/root/ffmpeg-mlu"
@@ -98,32 +128,18 @@ cd /home/share/test/cmd
 #解码1080P@30fps;
 ffmpeg_mlu_cmd_decode ${VideoFile} ${DeviceID} ${ChannelNum} ${TypeCode}
 #实时记录cnmon关键信息
-StringGrep="Video|Board|Device CPU Chip|DDR"
-LOG_FILENAME="./log/mludec_cnmon.log"
-cnmon -c ${DeviceID} > ${LOG_FILENAME}; sleep 0.2;
-while true; do cnmon info -c ${DeviceID} | grep -E "${StringGrep}" >> ${LOG_FILENAME};sleep 0.2;cnmon -c ${DeviceID} >> ${LOG_FILENAME};sleep 0.2;done &
+StringGrep="Video|Board|Device CPU Chip|DDR|Chip|Memory|Used|Usage|Power"
+LOG_FILENAME_CNMON="./log/mludec_cnmon.log"
+cnmon -c ${DeviceID} > ${LOG_FILENAME_CNMON}; sleep 0.1;
+#while true; do cnmon info -c ${DeviceID} | grep -E "${StringGrep}" >> ${LOG_FILENAME_CNMON};sleep 0.1;cnmon -c ${DeviceID} >> ${LOG_FILENAME_CNMON};sleep 0.1;done &
+while true; do cnmon info -c ${DeviceID} >> ${LOG_FILENAME_CNMON};sleep 0.1;cnmon -c ${DeviceID} >> ${LOG_FILENAME_CNMON};sleep 0.1;done &
 PID_CNMONProcess=$!
 echo "PID_CNMONProcess: $PID_CNMONProcess"
-# 2.2、查看转码后的log文件
-#实时显示日志文件
-echo "PID_LastProcess: $PID_LastProcess"
-tail -f ./log/mludec_Process*.log --pid=$PID_LastProcess
-sleep 0.5
-#删除【实时记录cnmon关键信息】的进程
-kill -9 $PID_CNMONProcess
-sleep 0.5
-#######################################################
-#显示所有日志文件
-echo -e "${green}#####################################"
-echo -e "All log files: ./log/mludec_Process*.log"
-ls ./log/mludec_Process*.log
-#统计日志文件的个数
-Number_Log_Files=`ls -l ./log/mludec_Process*.log|grep "^-"|wc -l`
-echo -e "Number of log files: $Number_Log_Files"
-#统计日志文件的个数
-echo -e "PID_LastProcess: $PID_LastProcess"
-echo -e "PID_CNMONProcess: $PID_CNMONProcess"
-echo -e "[Monitor Video Decoder 0-3、5-9 On Host:]"
-echo -e "[cd ../../tools && ./test-cnmon.sh 0]"
-echo -e "#####################################${none}"
+#sleep 0.2
+# 2.2. 查看ffmpeg执行业务后的log文件
+LOG_FILENAME_PROCESS="./log/mludec_Process*.log"
+echo "${LOG_FILENAME_PROCESS}"
+watch_log_info "${LOG_FILENAME_PROCESS}"
+
+
 

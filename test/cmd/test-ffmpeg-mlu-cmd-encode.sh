@@ -76,8 +76,10 @@ cd /home/share/test/cmd
 # 编码1080p@30fps:
 # for 365
 #ffmpeg_mlu_cmd_encode ../data/csgo_1920x1080_420_8_30_3602.y4m 0 12 h264_mluenc
+#ffmpeg_mlu_cmd_encode ../data/csgo_1920x1080_420_8_30_3602.y4m 0 12 hevc_mluenc
 # for 370
 ffmpeg_mlu_cmd_encode ../data/csgo_1920x1080_420_8_30_3602.y4m 0 24 h264_mluenc
+#ffmpeg_mlu_cmd_encode ../data/csgo_1920x1080_420_8_30_3602.y4m 0 24 hevc_mluenc
 echo -e "${green}"
 # 2.2、查看转码后的log文件
 #ls -lh *.log
